@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.32106.194
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalTvillingKlima", "DigitalTvillingKlima.csproj", "{C90B6711-73D2-40C0-B7D3-82FCF064B3D9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modeler", "Modeler", "{D0A7B21C-FA1B-47AB-9836-553E43353A22}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hjelpeklasser", "Hjelpeklasser", "{DAA86AC5-AD89-4861-A686-D007767B105B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
