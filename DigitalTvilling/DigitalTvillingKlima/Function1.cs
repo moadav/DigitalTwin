@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace DigitalTvillingKlima
 {
-    public static class Function1
+    public static class Function1 
     {
         [FunctionName("Function1")]
         public static void Run([TimerTrigger("0 0 * * * *")]TimerInfo myTimer, ILogger log)
