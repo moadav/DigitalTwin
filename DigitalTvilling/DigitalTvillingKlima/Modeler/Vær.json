@@ -1,0 +1,50 @@
+{
+  "@id": "dtmi:oslo:Vaar;1",
+  "@type": "Interface",
+  "displayName": "vaar",
+  "@context": "dtmi:dtdl:context;2",
+  "contents": [
+    {
+      "@type": "Property",
+      "name": "Symbol_code",
+      "schema": "string"
+    },
+    {
+      "@type": "Property",
+      "name": "Time",
+      "schema": "string"
+    },
+    {
+      "@type": "Property",
+      "name": "Air_pressure_at_sea_level",
+      "schema": "double"
+    },
+    {
+      "@type": "Property",
+      "name": "Air_temperature",
+      "schema": "double"
+    },
+    {
+      "@type": "Property",
+      "name": "Cloud_area_fraction",
+      "schema": "double"
+    },
+    {
+      "@type": "Property",
+      "name": "Relative_humidity",
+      "schema": "double"
+    },
+    {
+      "@type": "Property",
+      "name": "Wind_from_direction",
+      "schema": "double"
+    },
+    {
+      "@type": "Property",
+      "name": "Wind_speed",
+      "schema": "double"
+    }
+
+  ]
+
+}

@@ -13,6 +13,8 @@ namespace DigitalTvillingKlima.Interface
         public void CreateTwins(String id, BasicDigitalTwin basicDigitalTwin);
         public BasicDigitalTwin CreateTwinContents(String modelId);
 
+        
+
 
     }
 }

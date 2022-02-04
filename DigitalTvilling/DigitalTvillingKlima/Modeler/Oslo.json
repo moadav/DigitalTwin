@@ -1,0 +1,6 @@
+{
+  "@id": "dtmi:oslo:by;1",
+  "@context": "dtmi:dtdl:context;2",
+  "@type": "Interface",
+  "displayName": "Oslo"
+}
