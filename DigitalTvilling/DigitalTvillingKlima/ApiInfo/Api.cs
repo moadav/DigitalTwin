@@ -16,7 +16,7 @@ namespace DigitalTvillingKlima
             Client.DefaultRequestHeaders.Accept.Clear();
             Client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
-            Client.DefaultRequestHeaders.Add("User-Agent", "C# App, digital twins which collects weather data each hour");
+            Client.DefaultRequestHeaders.Add("User-Agent", "C# App update info each hour");
 
         }
        

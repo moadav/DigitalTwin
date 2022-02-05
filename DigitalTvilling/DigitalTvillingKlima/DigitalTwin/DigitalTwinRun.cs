@@ -2,7 +2,9 @@
 using DigitalTvillingKlima.Interface;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 
 namespace DigitalTvillingKlima.DigitalTwin
@@ -14,11 +16,15 @@ namespace DigitalTvillingKlima.DigitalTwin
         {
             Api.InitalizeApi();
 
-            Uri uri = new Uri(Api.azureUrl);
-            HttpClient httpClient = Api.singletonHttpClientInstance;
+            DigitalTwinsClient client = DigitalTwinsInstansiateClient.DigitalTwinsClient(new Uri("https://dthiofadt.api.weu.digitaltwins.azure.net"));
 
-            DigitalTwinsInstansiateClient.DigitalTwinsClient(uri, httpClient);
+            JsonToModel.InitializeModels(client);
             
+
+         
+            Console.WriteLine("completed");
+
+
 
         }
 

@@ -6,7 +6,8 @@ using System.Net.Http;
 
 public static class DigitalTwinsInstansiateClient
 {
-	public static DigitalTwinsClient DigitalTwinsClient(Uri digitalTwinsUrl, HttpClient httpClientInstance)
+    private static readonly HttpClient httpClientInstance = new HttpClient();
+    public static DigitalTwinsClient DigitalTwinsClient(Uri digitalTwinsUrl)
     {
         try
         {
@@ -21,7 +22,7 @@ public static class DigitalTwinsInstansiateClient
                 );
         } catch (Exception e)
         {
-            Console.WriteLine("Error detected " + e);
+            Console.WriteLine("Error detected on client instansiation " + e);
         }
 
         return null;
