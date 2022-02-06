@@ -8,9 +8,8 @@ namespace DigitalTvillingKlima.Interface
 {
     public interface IDigitalTwinsBuilder
     {
-        public Task CreateRelationshipAsync(DigitalTwinsClient client, string DigitalTwinsrcId, string DigitalTwintargetId);
-
-        public void CreateTwins(String id, BasicDigitalTwin basicDigitalTwin);
+        
+        public void CreateTwins(DigitalTwinsClient client, BasicDigitalTwin basicDigitalTwin);
         public BasicDigitalTwin CreateTwinContents(String modelId);
 
         
