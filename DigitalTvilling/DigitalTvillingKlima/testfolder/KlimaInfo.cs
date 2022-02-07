@@ -7,7 +7,7 @@ namespace DigitalTvillingKlima.testfolder
     public class KlimaInfo
     {
 
-        public string Symbole_code { get; set; } = "aa";
+        public string Symbole_code { get; set; }
         public string Time { get; set; }
         public Air_info Air_info { get; set; }
         public Wind_info Wind_info { get; set; }

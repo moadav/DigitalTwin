@@ -1,6 +1,7 @@
 ﻿using Azure.DigitalTwins.Core;
 using DigitalTvillingKlima.Hjelpeklasser;
 using DigitalTvillingKlima.Interface;
+using DigitalTvillingKlima.testfolder;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -33,8 +34,9 @@ namespace DigitalTvillingKlima.DigitalTwin
 
 
             DigitalTwinsOmradeKlima twins = new DigitalTwinsOmradeKlima();
-            BasicDigitalTwin contents = twins.CreateTwinContents("dtmi:omrade:klima;1");
-            twins.CreateTwins(client,contents);
+            BasicDigitalTwin contents = twins.CreateKlimaTwinContents("dtmi:omrade:klima;1",new KlimaInfo("Weathery","10 houa", new Air_info(2,2,2)
+                , new Wind_info(2,2,2)),"Oslo Lufthavn","231ttte");
+            twins.CreateTwinsAsync(client,contents);
        
 
 
