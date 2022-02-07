@@ -11,7 +11,7 @@ namespace DigitalTvillingKlima.Hjelpeklasser
 {
     public class DigitalTwinsOmradeKlima : IDigitalTwinsBuilder
     {
-        
+
 
         public BasicDigitalTwin CreateKlimaTwinContents(string modelId, KlimaInfo klimaInfo, string navn, string idNavn)
         {
@@ -38,7 +38,7 @@ namespace DigitalTvillingKlima.Hjelpeklasser
             try
             {
                 await client.CreateOrReplaceDigitalTwinAsync<BasicDigitalTwin>(basicDigitalTwin.Id, basicDigitalTwin);
-                Console.WriteLine($"Created twin: {basicDigitalTwin.Id}");
+                Console.WriteLine($"Created twin: {basicDigitalTwin.Id} successfully");
             }
             catch (RequestFailedException e)
             {
@@ -47,40 +47,34 @@ namespace DigitalTvillingKlima.Hjelpeklasser
 
         }
 
-        private async void UpdateKlimaTwinsAsync(DigitalTwinsClient client, BasicDigitalTwin basicDigitalTwin) {
+        private async void UpdateKlimaTwinsAsync(DigitalTwinsClient client, BasicDigitalTwin basicDigitalTwin)
+        {
             try
             {
-                
+
                 var updateTwins = new JsonPatchDocument();
                 updateTwins.AppendReplace("/name", basicDigitalTwin.Contents["name"]);
                 updateTwins.AppendReplace("/KlimaInfo", basicDigitalTwin.Contents["KlimaInfo"]);
-                await client.UpdateDigitalTwinAsync(basicDigitalTwin.Id,updateTwins);
+                await client.UpdateDigitalTwinAsync(basicDigitalTwin.Id, updateTwins);
 
                 Console.WriteLine($"Digital twin {basicDigitalTwin.Id} updated succesfully");
             }
             catch (RequestFailedException e)
             {
+                if(e.Status == 404)
+                    CreateNewKlimaTwinsAsync(client, basicDigitalTwin);
+                else
                 Console.WriteLine($"Update twin error: {e.Status}: {e.Message}");
             }
-           
+
         }
 
-        public async void CreateTwinsAsync(DigitalTwinsClient client, BasicDigitalTwin basicDigitalTwin)
+        public void CreateTwinsAsync(DigitalTwinsClient client, BasicDigitalTwin basicDigitalTwin)
         {
             try
             {
-               
-                if(await client.GetDigitalTwinAsync<object>(basicDigitalTwin.Id) != null)
-                {
-                  UpdateKlimaTwinsAsync(client,basicDigitalTwin);
-                }
-                else
-                {
-                    CreateNewKlimaTwinsAsync(client,basicDigitalTwin);
-                }
 
-
-
+                UpdateKlimaTwinsAsync(client, basicDigitalTwin);
             }
             catch (RequestFailedException e)
             {
