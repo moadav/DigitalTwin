@@ -37,7 +37,7 @@ namespace DigitalTvillingKlima.DigitalTwin
             BasicDigitalTwin contents = twins.CreateKlimaTwinContents("dtmi:omrade:klima;1",new KlimaInfo("Weathery","10 houa", new Air_info(2,2,2)
                 , new Wind_info(2,2,2)),"Oslo Lufthavn","new_klima");
             twins.CreateTwinsAsync(client,contents);
-       
+       ""
 
 
         }
