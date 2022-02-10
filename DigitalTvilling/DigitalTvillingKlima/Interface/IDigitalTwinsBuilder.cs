@@ -11,7 +11,7 @@ namespace DigitalTvillingKlima.Interface
     {
         
         public void CreateTwinsAsync(DigitalTwinsClient client, BasicDigitalTwin basicDigitalTwin);
-        public BasicDigitalTwin CreateKlimaTwinContents(String modelId, KlimaInfo klimaInfo, string navn, string idNavn);
+        public BasicDigitalTwin CreateOmradeTwinContents(KlimaInfo klimaInfo, string idNavn);
 
         
 

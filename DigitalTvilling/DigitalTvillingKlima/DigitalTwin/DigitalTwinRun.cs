@@ -33,12 +33,10 @@ namespace DigitalTvillingKlima.DigitalTwin
             Console.WriteLine("completed");
 
 
-            DigitalTwinsOmradeKlima twins = new DigitalTwinsOmradeKlima();
-            BasicDigitalTwin contents = twins.CreateKlimaTwinContents("dtmi:omrade:klima;1",new KlimaInfo("Weathery","10 houa", new Air_info(2,2,2)
-                , new Wind_info(2,2,2)),"Oslo Lufthavn","new_klima");
-            twins.CreateTwinsAsync(client,contents);
-       ""
-
+            DigitalTwinsOmrade twins = new DigitalTwinsOmrade();
+            BasicDigitalTwin contents = twins.CreateOmradeTwinContents(new KlimaInfo("DARK", "10:00:12", new Air_info(32, 22, 12)
+                , new Wind_info(22, 22, 22)), "luftHavn");
+            twins.CreateTwinsAsync(client, contents);
 
         }
 
