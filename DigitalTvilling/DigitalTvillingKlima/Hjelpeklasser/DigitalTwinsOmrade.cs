@@ -24,7 +24,7 @@ namespace DigitalTvillingKlima.Hjelpeklasser
                 Contents =
                 {
                     {"stedNavn", idNavn},
-                    { "weather", test(klimaInfo) }
+                    { "weather", new BasicDigitalTwinComponent { Contents ={  {"KlimaInfo", klimaInfo } } } }
 
                 },
                 Id = idNavn
@@ -35,24 +35,6 @@ namespace DigitalTvillingKlima.Hjelpeklasser
             return twinContents;
         }
 
-        private BasicDigitalTwinComponent test(KlimaInfo klimaInfo)
-        {
-
-            var tester = new BasicDigitalTwinComponent
-            {
-            
-                Contents =
-                {
-                    {"KlimaInfo", klimaInfo }
-                }
-            };
-
-
-
-            return tester;
-
-
-        }
 
 
         private async void CreateNewKlimaTwinsAsync(DigitalTwinsClient client, BasicDigitalTwin basicDigitalTwin)
