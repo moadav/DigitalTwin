@@ -34,9 +34,9 @@ namespace DigitalTvillingKlima.DigitalTwin
 
 
             DigitalTwinsOmrade twins = new DigitalTwinsOmrade();
-            BasicDigitalTwin contents = twins.CreateOmradeTwinContents(new KlimaInfo("CLOUDY", "10:00:12", new Air_info(32, 22, 12)
-                , new Wind_info(22, 22, 22)), "luftHavn");
-            twins.CreateTwinsAsync(client, contents);
+       //     BasicDigitalTwin contents = twins.CreateOmradeTwinContents(new KlimaInfo("CLOUDY", "10:00:12", new Air_info(32, 22, 12)
+        //        , new Wind_info(22, 22, 22)), "luftHavn");
+         //   twins.CreateTwinsAsync(client, contents);
 
         }
 
