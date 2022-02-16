@@ -1,0 +1,22 @@
+{
+
+  "@id": "dtmi:omrade:sted;1",
+  "@type": "Interface",
+  "@context": "dtmi:dtdl:context;2",
+  "displayName": "Omrade",
+  "extends": [ "dtmi:oslo:by;1" ],
+  "contents": [
+    {
+      "@type": "Property",
+      "name": "stedNavn",
+      "schema": "string"
+    },
+    {
+      "@type": "Component",
+      "name": "weather",
+      "schema": "dtmi:omrade:klima;1"
+    }
+  ]
+
+
+}

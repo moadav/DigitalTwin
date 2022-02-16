@@ -1,0 +1,67 @@
+{
+  "@id": "dtmi:omrade:klima;1",
+  "@context": "dtmi:dtdl:context;2",
+  "@type": "Interface",
+  "displayName": "Omrade_klima",
+  "extends": [ "dtmi:oslo:byInfo;1" ],
+  "contents": [
+    {
+      "@type": "Property",
+      "name": "KlimaInfo",
+      "schema": {
+        "@type": "Object",
+        "fields": [
+          {
+            "name": "Symbole_code",
+            "schema": "string"
+          },
+          {
+            "name": "Time",
+            "schema": "string"
+          },
+          {
+            "name": "Wind_info",
+            "schema": {
+              "@type": "Object",
+              "fields": [
+                {
+                  "name": "Relative_humidity",
+                  "schema": "double"
+                },
+                {
+                  "name": "Wind_from_direction",
+                  "schema": "double"
+                },
+                {
+                  "name": "Wind_speed",
+                  "schema": "double"
+                }
+              ]
+            }
+          },
+          {
+            "name": "Air_info",
+            "schema": {
+              "@type": "Object",
+              "fields": [
+                {
+                  "name": "Air_pressure_at_sea_level",
+                  "schema": "double"
+                },
+                {
+                  "name": "Air_temperature",
+                  "schema": "double"
+                },
+                {
+                  "name": "Cloud_area_fraction",
+                  "schema": "double"
+                }
+              ]
+            }
+          }
+
+        ]
+      }
+    }
+  ]
+}
