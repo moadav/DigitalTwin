@@ -9,12 +9,12 @@ namespace DigitalTvillingKlima.Hjelpeklasser
 {
     public class Relationshipbuilder
     {
-        public async static Task CreateRelationshipAsync(DigitalTwinsClient client, string digitalTwinSrcId, string digitalTwinTargetId, string relname)
+        public async static Task CreateRelationshipAsync(DigitalTwinsClient client, string digitalTwinSrcId, string digitalTwinTargetId,string nameId)
         {          
             try
             {
-                string relId = $"{digitalTwinSrcId}{relname}{digitalTwinTargetId}";
-                await client.CreateOrReplaceRelationshipAsync(digitalTwinSrcId, relId,  BasicRelationshipCreator(digitalTwinTargetId));
+                string relId = $"{digitalTwinSrcId}{nameId}{digitalTwinTargetId}";
+                await client.CreateOrReplaceRelationshipAsync(digitalTwinSrcId, relId,  BasicRelationshipCreator(digitalTwinTargetId,nameId));
                 Console.WriteLine("Created relationship successfully");
             }
             catch (RequestFailedException e)
@@ -22,13 +22,14 @@ namespace DigitalTvillingKlima.Hjelpeklasser
                 Console.WriteLine($"Create relationship error: {e.Status}: {e.Message}");
             }
         }
+        
 
-        private static BasicRelationship BasicRelationshipCreator(string targetId)
+        private static BasicRelationship BasicRelationshipCreator(string targetId,string nameId)
         {
             var relationship = new BasicRelationship
             {
                 TargetId = targetId,
-                Name = "har_klima"
+                Name = nameId
             };
             return relationship;
         }

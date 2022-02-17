@@ -10,7 +10,7 @@ namespace DigitalTvillingKlima
     public static class DigitalTwinWeather
     { 
         [FunctionName("KlimaData")]
-        public static void Run([TimerTrigger("0 * * * * *")]TimerInfo myTimer, ILogger log)
+        public static void Run([TimerTrigger("0 0 * * * *")]TimerInfo myTimer, ILogger log)
         {
             DigitalTwinRun digitalTwinRun = new DigitalTwinRun();
             digitalTwinRun.Run();

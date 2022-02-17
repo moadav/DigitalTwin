@@ -9,13 +9,13 @@ namespace DigitalTvillingKlima.testfolder
         public double Lat { get; set; }
         public double Lon { get; set; }
 
-        public string Name { get; set; }
+        public string StedNavn { get; set; }
 
-        public Coordinates(double lat, double lon, string name)
+        public Coordinates(double lat, double lon, string sn)
         {
-            this.Lat = lat;
-            this.Lon = lon;
-            this.Name = name;
+            Lat = lat;
+            Lon = lon;
+            StedNavn = sn;
         }
 
 

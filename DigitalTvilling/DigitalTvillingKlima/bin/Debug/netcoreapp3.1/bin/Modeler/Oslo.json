@@ -2,15 +2,5 @@
   "@id": "dtmi:oslo:by;1",
   "@context": "dtmi:dtdl:context;2",
   "@type": "Interface",
-  "displayName": "Oslo",
-  "contents": [
-    {
-      "@id": "dtmi:oslo:omrader:rel_har_omrade;1",
-      "@type": "Relationship",
-      "name": "oslo_har_omrader",
-      "displayName": "Oslo har omrader",
-      "target": "dtmi:omrade:sted;1"
-
-    }
-  ]
+  "displayName": "Oslo"
 }

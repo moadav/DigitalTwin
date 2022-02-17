@@ -23,7 +23,6 @@ namespace DigitalTvillingKlima.Hjelpeklasser
                 },
                 Contents =
                 {
-                    {"stedNavn", idNavn},
                     {"Coordinates",  coordinates},
                     { "weather", new BasicDigitalTwinComponent { Contents ={  {"KlimaInfo", klimaInfo } } } }
 
