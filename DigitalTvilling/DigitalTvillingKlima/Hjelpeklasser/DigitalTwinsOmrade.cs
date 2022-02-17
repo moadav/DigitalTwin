@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace DigitalTvillingKlima.Hjelpeklasser
 {
-    public class DigitalTwinsOmrade : IDigitalTwinsBuilder
+    public class DigitalTwinsOmrade : IDigitalTwinsKlimaBuilder
     {
 
 
-        public BasicDigitalTwin CreateOmradeTwinContents(KlimaInfo klimaInfo, string idNavn)
+        public BasicDigitalTwin CreateOmradeTwinContents(KlimaInfo klimaInfo, string idNavn, Coordinates coordinates)
         {
             var twinContents = new BasicDigitalTwin()
             {
@@ -24,6 +24,7 @@ namespace DigitalTvillingKlima.Hjelpeklasser
                 Contents =
                 {
                     {"stedNavn", idNavn},
+                    {"Coordinates",  coordinates},
                     { "weather", new BasicDigitalTwinComponent { Contents ={  {"KlimaInfo", klimaInfo } } } }
 
                 },

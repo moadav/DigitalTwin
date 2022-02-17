@@ -16,7 +16,7 @@ namespace DigitalTvillingKlima
             Client.DefaultRequestHeaders.Accept.Clear();
             Client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
-            Client.DefaultRequestHeaders.Add("User-Agent", "C# App update info each hour");
+            Client.DefaultRequestHeaders.Add("User-Agent", "C# bachelor App that update weather info each hour");
 
         }
        

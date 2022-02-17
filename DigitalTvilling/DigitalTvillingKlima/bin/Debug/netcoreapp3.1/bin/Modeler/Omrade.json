@@ -12,6 +12,24 @@
       "schema": "string"
     },
     {
+      "@type": "Property",
+      "name": "Coordinates",
+      "schema": {
+        "@type": "Object",
+        "fields": [
+          {
+            "name": "lat",
+            "schema": "double"
+          },
+          {
+            "name": "lon",
+            "schema": "double"
+          }
+        ]
+      }
+
+    },
+    {
       "@type": "Component",
       "name": "weather",
       "schema": "dtmi:omrade:klima;1"

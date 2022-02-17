@@ -15,6 +15,8 @@ public static class JsonToModel
 
         try
         {
+            
+
             await digitalTwinsClient.CreateModelsAsync(models);
         }
         catch (RequestFailedException e)

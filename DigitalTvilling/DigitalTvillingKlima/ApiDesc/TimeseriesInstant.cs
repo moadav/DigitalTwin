@@ -6,13 +6,9 @@ using System.Threading.Tasks;
 
 namespace DigitalTvillingKlima
 {
-    public class TimeseriesData
+    public class TimeseriesInstant
     {
-
-        public TimeseriesInstant Instant { get; set; }
-        public WeatherNext1Hour Next_1_hours { get; set; }
-
-     
+        public TimeseriesDetails Details { get; set; }
 
     }
 }

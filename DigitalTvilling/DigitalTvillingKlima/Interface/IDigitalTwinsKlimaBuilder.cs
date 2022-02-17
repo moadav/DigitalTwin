@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace DigitalTvillingKlima.Interface
 {
-    public interface IDigitalTwinsBuilder
+    public interface IDigitalTwinsKlimaBuilder
     {
         
         public void CreateTwinsAsync(DigitalTwinsClient client, BasicDigitalTwin basicDigitalTwin);
-        public BasicDigitalTwin CreateOmradeTwinContents(KlimaInfo klimaInfo, string idNavn);
+        public BasicDigitalTwin CreateOmradeTwinContents(KlimaInfo klimaInfo, string idNavn, Coordinates coordinates);
 
         
 
