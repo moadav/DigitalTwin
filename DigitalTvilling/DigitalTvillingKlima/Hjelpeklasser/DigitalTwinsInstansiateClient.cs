@@ -11,9 +11,9 @@ public static class DigitalTwinsInstansiateClient
     {
         try
         {
-            var options = new DefaultAzureCredentialOptions { ExcludeVisualStudioCredential = true };
-            var cred = new DefaultAzureCredential(options);
-
+            var options = new DefaultAzureCredentialOptions { ExcludeVisualStudioCredential = true};
+             var cred = new DefaultAzureCredential(options);
+            //var cred = new ManagedIdentityCredential();
             return new DigitalTwinsClient(digitalTwinsUrl, cred,
                 new DigitalTwinsClientOptions
                 {

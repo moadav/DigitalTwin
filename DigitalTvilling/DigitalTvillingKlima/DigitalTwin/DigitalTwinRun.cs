@@ -16,7 +16,7 @@ namespace DigitalTvillingKlima.DigitalTwin
     {
 
         private List<Coordinates> Koordinater = new List<Coordinates>();
-        private DigitalTwinsClient Client = DigitalTwinsInstansiateClient.DigitalTwinsClient(new Uri("https://dthiofadt.api.weu.digitaltwins.azure.net"));
+        DigitalTwinsClient Client = DigitalTwinsInstansiateClient.DigitalTwinsClient(new Uri("https://dthiofadt.api.weu.digitaltwins.azure.net"));
 
         private string Weathersymbol { get; set; }
         private string Time { get; set; }
@@ -31,11 +31,11 @@ namespace DigitalTvillingKlima.DigitalTwin
 
         public void Run()
         {
-
             Koordinaterverdi();
             Api.InitalizeApi();
 
-            JsonToModel.InitializeModels(Client);
+            //skaper error
+            //JsonToModel.InitializeModels(Client);
 
             CreateTwins();
             Console.WriteLine("completed");
@@ -43,17 +43,18 @@ namespace DigitalTvillingKlima.DigitalTwin
 
 
         }
+      
 
         private void Koordinaterverdi()
         {
             Koordinater.Clear();
             Koordinater.Add(new Coordinates(59.9268, 10.7162, "Majorstuen"));
             Koordinater.Add(new Coordinates(59.9167, 10.7068, "Frogner"));
-            Koordinater.Add(new Coordinates(59.9261, 10.7757, "Grünerlokka"));
-            Koordinater.Add(new Coordinates(59.9380, 10.7363, "ulleval"));
+            Koordinater.Add(new Coordinates(59.9261, 10.7757, "Grunerlokka"));
+            Koordinater.Add(new Coordinates(59.9380, 10.7363, "Ulleval"));
             Koordinater.Add(new Coordinates(59.9411, 10.8199, "Bjerke"));
             Koordinater.Add(new Coordinates(59.9127, 10.7318, "Sentrum"));
-            Koordinater.Add(new Coordinates(59.9068, 10.7623, "Gamle Oslo"));
+            Koordinater.Add(new Coordinates(59.9068, 10.7623, "Gamle-Oslo"));
         }
 
         private async void CreateTwins()
@@ -87,11 +88,8 @@ namespace DigitalTvillingKlima.DigitalTwin
 
 
                 CreateTwinToAzure(klimaInfo, coordinates);
-
-
             }
-            else
-                Console.WriteLine("----------------------------");
+      
         }
 
         private async void CreateTwinToAzure(KlimaInfo klimaInfo, Coordinates coordinates)
@@ -102,15 +100,11 @@ namespace DigitalTvillingKlima.DigitalTwin
 
             twins.CreateTwinsAsync(Client, contents);
 
-            await Relationshipbuilder.CreateRelationshipAsync(Client, contents.Id, "Omrader", "omrader_har_sted");
+            await Relationshipbuilder.CreateRelationshipAsync(Client, contents.Id, "Oslo", "Oslo_har_bydel");
 
-            CreateOtherRelationship();
         }
 
-        private async void CreateOtherRelationship()
-        {
-            await Relationshipbuilder.CreateRelationshipAsync(Client,"Omrader","Oslo", "oslo_har_omrader");
-        }
+   
         private void giveValues(Feature getWeather, int index)
         {
             string aTime = getWeather.Properties.TimeSeries[0].Time;

@@ -3,8 +3,8 @@
   "@id": "dtmi:omrade:sted;1",
   "@type": "Interface",
   "@context": "dtmi:dtdl:context;2",
-  "displayName": "Omrade",
-  "extends": [ "dtmi:oslo:omrader;1" ],
+  "displayName": "Bydel",
+  "extends": [ "dtmi:oslo:by;1" ],
   "contents": [
     {
       "@type": "Property",
@@ -34,10 +34,10 @@
       "schema": "dtmi:omrade:klima;1"
     },
     {
-      "@id": "dtmi:omrade_sted:rel_har_steder;1",
+      "@id": "dtmi:oslo:omrade:rel_har_bydel;1",
       "@type": "Relationship",
-      "name": "omrader_har_sted",
-      "displayName": "har sted",
+      "name": "Oslo_har_bydel",
+      "displayName": "Oslo har bydel",
       "target": "dtmi:oslo:by;1"
 
     }
