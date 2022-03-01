@@ -1,0 +1,21 @@
+{
+
+  "@id": "dtmi:oslo:oslo_sykler;1",
+  "@type": "Interface",
+  "@context": "dtmi:dtdl:context;2",
+  "displayName": "Oslo_Sykler",
+  "extends": [ "dtmi:oslo:by;1" ],
+  "contents": [
+
+    {
+      "@id": "dtmi:oslo:sykler:rel_har_sykler;1",
+      "@type": "Relationship",
+      "name": "Oslo_har_sykler",
+      "displayName": "Oslo har sykler",
+      "target": "dtmi:oslo:by;1"
+
+    }
+  ]
+
+
+}

@@ -1,6 +1,6 @@
 {
-  "@id": "dtmi:oslo:byInfo;1",
+  "@id": "dtmi:oslo:sykler;1",
   "@context": "dtmi:dtdl:context;2",
   "@type": "Interface",
-  "displayName": "By_Info"
+  "displayName": "Sykler"
 }

@@ -1,0 +1,100 @@
+{
+  "@id": "dtmi:oslo:sykkel_status;1",
+  "@context": "dtmi:dtdl:context;2",
+  "@type": "Interface",
+  "displayName": "Sykkel_Status",
+  "extends": [ "dtmi:oslo:sykler;1" ],
+  "contents": [
+    {
+      "@type": "Property",
+      "name": "Station_Status",
+      "schema": {
+        "@type": "Object",
+        "fields": [
+          {
+            "name": "Station_Id",
+            "schema": "integer"
+          },
+          {
+            "name": "Bicycle_Available",
+            "schema": {
+              "@type": "Object",
+              "fields": [
+                {
+                  "name": "Num_Bikes_Available",
+                  "schema": "integer"
+                },
+                {
+                  "name": "Num_Docks_Available",
+                  "schema": "integer"
+                }
+              ]
+            }
+          },
+          {
+            "name": "Station_Availablity",
+            "schema": {
+              "@type": "Object",
+              "fields": [
+                {
+                  "name": "Station_Is_Installed",
+                  "schema": {
+                    "@type": "Enum",
+                    "valueSchema": "integer",
+                    "enumValues": [
+                      {
+                        "name": "Not_Installed",
+                        "enumValue": 0
+                      },
+                      {
+                        "name": "Installed",
+                        "enumValue": 1
+                      }
+                    ]
+
+                  }
+                },
+                {
+
+                  "name": "Station_Is_Renting",
+                  "schema": {
+                    "@type": "Enum",
+                    "valueSchema": "integer",
+                    "enumValues": [
+                      {
+                        "name": "Not_Rented",
+                        "enumValue": 0
+                      },
+                      {
+                        "name": "Rented",
+                        "enumValue": 1
+                      }
+                    ]
+                  }
+                },
+                {
+
+                  "name": "Station_Is_Returning",
+                  "schema": {
+                    "@type": "Enum",
+                    "valueSchema": "integer",
+                    "enumValues": [
+                      {
+                        "name": "Not_Returning",
+                        "enumValue": 0
+                      },
+                      {
+                        "name": "Returning",
+                        "enumValue": 1
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

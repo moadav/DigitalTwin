@@ -2,7 +2,7 @@
   "@id": "dtmi:omrade:klima;1",
   "@context": "dtmi:dtdl:context;2",
   "@type": "Interface",
-  "displayName": "Omrade_klima",
+  "displayName": "Omrade_Klima",
   "extends": [ "dtmi:oslo:byInfo;1" ],
   "contents": [
     {

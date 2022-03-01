@@ -1,0 +1,67 @@
+{
+
+  "@id": "dtmi:oslo:sykkler:sykkel;1",
+  "@type": "Interface",
+  "@context": "dtmi:dtdl:context;2",
+  "displayName": "Sykkel_Tilgjengelighet",
+  "extends": [ "dtmi:oslo:oslo_sykler;1" ],
+  "contents": [
+    {
+      "@type": "Property",
+      "name": "Station_information",
+      "schema": {
+        "@type": "Object",
+        "fields": [
+          {
+            "name": "Station_Id",
+            "schema": "integer"
+          },
+          {
+            "name": "Station_Name",
+            "schema": "string"
+          },
+          {
+            "name": "Station_Adress",
+            "schema": "string"
+          },
+          {
+            "name": "Station_Capacity",
+            "schema":  "integer"
+          },
+          {
+            "name": "Station_Location",
+            "schema": {
+              "@type": "Object",
+              "fields": [
+                {
+                  "name": "Lat",
+                  "schema": "double"
+                },
+                {
+                  "name": "Lon",
+                  "schema":  "double"
+                }
+              ]
+            }
+          }
+        ]
+      }
+
+    },
+    {
+      "@type": "Component",
+      "name": "Bicycle_Status",
+      "schema": "dtmi:oslo:sykkel_status;1"
+    },
+    {
+      "@id": "dtmi:oslo:sykkel:rel_har_sykkel;1",
+      "@type": "Relationship",
+      "name": "sykkler_har_sykkel",
+      "displayName": "sykler har sykkel",
+      "target": "dtmi:oslo:oslo_sykler;1"
+
+    }
+  ]
+
+
+}
