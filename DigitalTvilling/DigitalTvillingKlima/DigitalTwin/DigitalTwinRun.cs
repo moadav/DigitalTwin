@@ -32,7 +32,7 @@ namespace DigitalTvillingKlima.DigitalTwin
         public void Run()
         {
             Koordinaterverdi();
-            Api.InitalizeApi();
+            Api.InitalizeKlimaApi();
 
             //skaper error
             //JsonToModel.InitializeModels(Client);

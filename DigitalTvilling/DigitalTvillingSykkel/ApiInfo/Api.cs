@@ -10,14 +10,13 @@ namespace DigitalTvillingKlima
         public static readonly string azureUrl = Environment.GetEnvironmentVariable("ADT_SERVICE_URL");
         public static readonly HttpClient singletonHttpClientInstance = new HttpClient();
 
-        public static void InitalizeKlimaApi()
+        public static void InitalizeSykkelApi()
         {
             Client = new HttpClient();
             Client.DefaultRequestHeaders.Accept.Clear();
             Client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
-            Client.DefaultRequestHeaders.Add("User-Agent", "C# App that update weather info each hour");
-            
+            Client.DefaultRequestHeaders.Add("User-Agent", "C# bachelor App that update weather info each hour");
 
         }
        
