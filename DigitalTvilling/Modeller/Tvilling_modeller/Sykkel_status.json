@@ -12,10 +12,6 @@
         "@type": "Object",
         "fields": [
           {
-            "name": "Station_Id",
-            "schema": "integer"
-          },
-          {
             "name": "Bicycle_Available",
             "schema": {
               "@type": "Object",

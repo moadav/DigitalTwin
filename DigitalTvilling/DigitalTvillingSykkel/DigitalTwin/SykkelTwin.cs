@@ -1,18 +1,11 @@
-﻿using Azure;
-using Azure.DigitalTwins.Core;
-using DigitalTvillingKlima.Interface;
-using DigitalTvillingKlima.testfolder;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 
-namespace DigitalTvillingKlima.Hjelpeklasser
+namespace DigitalTvillingSykkel.DigitalTwin
 {
-    public class DigitalTwinsOmrade : IDigitalTwinsKlimaBuilder
+    public class SykkelTwin
     {
-
 
         public BasicDigitalTwin CreateOmradeTwinContents(KlimaInfo klimaInfo, string idNavn, Coordinates coordinates)
         {
@@ -41,7 +34,7 @@ namespace DigitalTvillingKlima.Hjelpeklasser
         {
             try
             {
-                
+
                 await client.CreateOrReplaceDigitalTwinAsync<BasicDigitalTwin>(basicDigitalTwin.Id, basicDigitalTwin);
                 Console.WriteLine($"Created twin: {basicDigitalTwin.Id} successfully");
             }
@@ -59,10 +52,10 @@ namespace DigitalTvillingKlima.Hjelpeklasser
 
                 var updateTwins = new JsonPatchDocument();
 
-              
-                 updateTwins.AppendReplace("/weather", basicDigitalTwin.Contents["weather"]);
 
-                 await client.UpdateDigitalTwinAsync(basicDigitalTwin.Id, updateTwins);
+                updateTwins.AppendReplace("/weather", basicDigitalTwin.Contents["weather"]);
+
+                await client.UpdateDigitalTwinAsync(basicDigitalTwin.Id, updateTwins);
 
                 Console.WriteLine($"Digital twin {basicDigitalTwin.Id} updated succesfully");
             }
@@ -88,5 +81,9 @@ namespace DigitalTvillingKlima.Hjelpeklasser
                 Console.WriteLine($"Create twin error: {e.Status}: {e.Message}");
             }
         }
+
+
+
+
     }
 }

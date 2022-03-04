@@ -5,12 +5,13 @@ using Microsoft.Extensions.Logging;
 
 namespace DigitalTvillingSykkel
 {
-    public static class Function1
+    public static class DigitalTvillingOsloSykkel
     {
-        [FunctionName("Function1")]
+        [FunctionName("SykkelData")]
         public static void Run([TimerTrigger("0 */10 * * * *")]TimerInfo myTimer, ILogger log)
         {
-            log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
+           
+            
         }
     }
 }
