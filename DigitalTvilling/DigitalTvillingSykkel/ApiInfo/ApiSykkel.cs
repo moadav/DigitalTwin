@@ -16,7 +16,7 @@ namespace DigitalTvillingSykkel
             Client.DefaultRequestHeaders.Accept.Clear();
             Client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
-            Client.DefaultRequestHeaders.Add("Client-Identifier", "DigitalTvilling-Høgskolen-i-Østfold-Bachelor");
+            Client.DefaultRequestHeaders.Add("Client-Identifier", "DigitalTvilling-hogskolen-i-ostfold-Bachelor");
 
         }
        

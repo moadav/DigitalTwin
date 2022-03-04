@@ -21,7 +21,7 @@
             "schema": "string"
           },
           {
-            "name": "Station_Adress",
+            "name": "Station_Address",
             "schema": "string"
           },
           {

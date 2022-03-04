@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Azure;
+using Azure.DigitalTwins.Core;
+using DigitalTvillingSykkel.SykkelTvillingObjekter;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,7 +10,7 @@ namespace DigitalTvillingSykkel.DigitalTwin
     public class SykkelTwin
     {
 
-        public BasicDigitalTwin CreateOmradeTwinContents(KlimaInfo klimaInfo, string idNavn, Coordinates coordinates)
+        public BasicDigitalTwin CreateOmradeTwinContents(Station_Information klimaInfo, string idNavn, Station_Availablity coordinates)
         {
             var twinContents = new BasicDigitalTwin()
             {

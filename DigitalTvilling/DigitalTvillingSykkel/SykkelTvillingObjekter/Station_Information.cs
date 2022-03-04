@@ -10,7 +10,7 @@ namespace DigitalTvillingSykkel.SykkelTvillingObjekter
 
         public string Station_Name { get; set; }
 
-        public string Station_Adress { get; set; }
+        public string Station_Address { get; set; }
 
         public int Station_Capacity { get; set; }
 
