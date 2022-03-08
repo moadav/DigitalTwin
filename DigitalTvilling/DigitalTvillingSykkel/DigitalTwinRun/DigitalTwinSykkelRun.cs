@@ -13,14 +13,14 @@ namespace DigitalTvillingSykkel.DigitalTwinRun
         public void RunSykkel()
         {
             ApiSykkel.InitalizeSykkelApi();
-            apiResponse();
+            ApiResponse();
 
 
 
         }
 
 
-        private async void apiResponse()
+        private async void ApiResponse()
         {
             try
             {

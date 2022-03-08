@@ -10,17 +10,17 @@ namespace DigitalTvillingSykkel.DigitalTwin
     public class SykkelTwin
     {
 
-        public BasicDigitalTwin CreateOmradeTwinContents(Station_Information klimaInfo, string idNavn, Station_Availablity coordinates)
+        public BasicDigitalTwin CreateSykkelTwinContents(Station_Information station_Information, string idNavn, Station_Status station_Status)
         {
             var twinContents = new BasicDigitalTwin()
             {
                 Metadata = {
-                    ModelId = "dtmi:omrade:sted;1"
+                    ModelId = "dtmi:oslo:sykkler:sykkel;1"
                 },
                 Contents =
                 {
-                    {"Coordinates",  coordinates},
-                    { "weather", new BasicDigitalTwinComponent { Contents ={  {"KlimaInfo", klimaInfo } } } }
+                    {"Station_information",  station_Information},
+                    { "Bicycle_Status", new BasicDigitalTwinComponent { Contents ={  {"Station_Status", station_Status } } } }
 
                 },
                 Id = idNavn
@@ -33,7 +33,7 @@ namespace DigitalTvillingSykkel.DigitalTwin
 
 
 
-        private async void CreateNewKlimaTwinsAsync(DigitalTwinsClient client, BasicDigitalTwin basicDigitalTwin)
+        private async void CreateNewSykkelTwinsAsync(DigitalTwinsClient client, BasicDigitalTwin basicDigitalTwin)
         {
             try
             {
@@ -56,7 +56,8 @@ namespace DigitalTvillingSykkel.DigitalTwin
                 var updateTwins = new JsonPatchDocument();
 
 
-                updateTwins.AppendReplace("/weather", basicDigitalTwin.Contents["weather"]);
+                updateTwins.AppendReplace("/Bicycle_Status", basicDigitalTwin.Contents["Bicycle_Status"]);
+                updateTwins.AppendReplace("Station_information", basicDigitalTwin.Contents["Station_information"]);
 
                 await client.UpdateDigitalTwinAsync(basicDigitalTwin.Id, updateTwins);
 
@@ -65,7 +66,7 @@ namespace DigitalTvillingSykkel.DigitalTwin
             catch (RequestFailedException e)
             {
                 if (e.Status == 404)
-                    CreateNewKlimaTwinsAsync(client, basicDigitalTwin);
+                    CreateNewSykkelTwinsAsync(client, basicDigitalTwin);
                 else
                     Console.WriteLine($"Update twin error: {e.Status}: {e.Message}");
             }
