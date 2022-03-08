@@ -11,5 +11,12 @@ namespace DigitalTvillingSykkel.SykkelTvillingObjekter
         public double Lon { get; set; }
 
 
+        public Station_Location(double lat, double lon)
+        {
+            Lat = lat;
+            lon = lon;
+        }
+
+
     }
 }

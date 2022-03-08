@@ -10,6 +10,12 @@ namespace DigitalTvillingSykkel.SykkelTvillingObjekter
 
         public int Num_Docks_Available { get; set; }
 
+        public Bicycle_Available(int num_Bikes_Available, int num_Docks_Available)
+        {
+            this.Num_Bikes_Available = num_Bikes_Available;
+            this.Num_Docks_Available = num_Docks_Available;
+        }
+
 
     }
 }
