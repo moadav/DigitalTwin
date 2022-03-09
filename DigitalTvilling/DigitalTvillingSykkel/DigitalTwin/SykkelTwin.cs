@@ -57,7 +57,7 @@ namespace DigitalTvillingSykkel.DigitalTwin
 
 
                 updateTwins.AppendReplace("/Bicycle_Status", basicDigitalTwin.Contents["Bicycle_Status"]);
-                updateTwins.AppendReplace("Station_information", basicDigitalTwin.Contents["Station_information"]);
+                updateTwins.AppendReplace("/Station_information", basicDigitalTwin.Contents["Station_information"]);
 
                 await client.UpdateDigitalTwinAsync(basicDigitalTwin.Id, updateTwins);
 
