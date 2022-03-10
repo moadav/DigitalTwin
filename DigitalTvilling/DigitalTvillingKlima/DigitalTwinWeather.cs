@@ -1,4 +1,6 @@
 using System;
+using Azure.DigitalTwins.Core;
+using DigitalTvillingKlima.DigitalTwin;
 using DigitalTvillingKlima.Interface;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host;
@@ -8,10 +10,12 @@ namespace DigitalTvillingKlima
 {
     public static class DigitalTwinWeather
     { 
-        [FunctionName("Function1")]
-        public static void Run([TimerTrigger("0 0 * * * *")]TimerInfo myTimer, ILogger log)
+        [FunctionName("KlimaData")]
+        public  static void Run([TimerTrigger("0 0 * * * *")]TimerInfo myTimer, ILogger log)
         {
-            log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
+            DigitalTwinRun digitalTwinRun = new DigitalTwinRun();       
+            digitalTwinRun.Run();
+
         }
     }
 }

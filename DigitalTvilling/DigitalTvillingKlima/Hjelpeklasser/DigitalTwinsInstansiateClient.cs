@@ -6,13 +6,14 @@ using System.Net.Http;
 
 public static class DigitalTwinsInstansiateClient
 {
-	public static DigitalTwinsClient DigitalTwinsClient(Uri digitalTwinsUrl, HttpClient httpClientInstance)
+    private static readonly HttpClient httpClientInstance = new HttpClient();
+    public static DigitalTwinsClient DigitalTwinsClient(Uri digitalTwinsUrl)
     {
         try
         {
-            var options = new DefaultAzureCredentialOptions { ExcludeVisualStudioCredential = true };
-            var cred = new DefaultAzureCredential(options);
-
+            var options = new DefaultAzureCredentialOptions { ExcludeVisualStudioCredential = true};
+             var cred = new DefaultAzureCredential(options);
+            //var cred = new ManagedIdentityCredential();
             return new DigitalTwinsClient(digitalTwinsUrl, cred,
                 new DigitalTwinsClientOptions
                 {
@@ -21,7 +22,7 @@ public static class DigitalTwinsInstansiateClient
                 );
         } catch (Exception e)
         {
-            Console.WriteLine("Error detected " + e);
+            Console.WriteLine("Error detected on client instansiation " + e);
         }
 
         return null;
