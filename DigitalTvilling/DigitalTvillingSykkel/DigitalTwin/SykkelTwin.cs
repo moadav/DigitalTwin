@@ -53,6 +53,8 @@ namespace DigitalTvillingSykkel.DigitalTwin
             try
             {
 
+             
+
                 var updateTwins = new JsonPatchDocument();
 
 
