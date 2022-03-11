@@ -16,7 +16,7 @@ namespace DigitalTvillingKlima
             Client.DefaultRequestHeaders.Accept.Clear();
             Client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
-            Client.DefaultRequestHeaders.Add("User-Agent", "hiof.no - bachelorprosjekt som oppdaterer vær per time - digitaltvilling - mohammedalidavami@gmail.com");
+            Client.DefaultRequestHeaders.Add("User-Agent", "hiof.no - bachelorprosject updates weather info each hour - digitaltvilling ");
             
 
         }

@@ -89,7 +89,7 @@ namespace DigitalTvillingSykkel.DigitalTwinRun
         private void ReadValues(Station_Info station_status_data, Station_Info station_info_data)
         {
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < station_status_data.Data.Stations.Count; i++)
             {
                 for (int j = 0; j < station_info_data.Data.Stations.Count; j++)
                 {

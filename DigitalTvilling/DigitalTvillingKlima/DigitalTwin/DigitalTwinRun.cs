@@ -48,12 +48,35 @@ namespace DigitalTvillingKlima.DigitalTwin
         private void Koordinaterverdi()
         {
             Koordinater.Clear();
-            Koordinater.Add(new Coordinates(59.9268, 10.7162, "Majorstuen"));
+            
+            Koordinater.Add(new Coordinates(59.8911, 10.8315, "Oosten-sjoo"));
+           
+            Koordinater.Add(new Coordinates(59.8345, 10.8196, "Soondre-Nordstrand"));
+           
+            Koordinater.Add(new Coordinates(59.9606, 10.9222, "Stovner"));
+            
+            Koordinater.Add(new Coordinates(59.9290, 10.7403, "Hanshaugen"));
+            
+            Koordinater.Add(new Coordinates(59.9379, 10.7609, "Sagene"));
+            
+            Koordinater.Add(new Coordinates(59.9542, 10.7633, "Nordre-Aker"));
+            
+            Koordinater.Add(new Coordinates(59.9545, 10.8707, "Grorud"));
+           
+            Koordinater.Add(new Coordinates(59.9308, 10.8638, "Alna"));
+
+            Koordinater.Add(new Coordinates(59.8715, 10.7913, "Nordstrand"));
+            
             Koordinater.Add(new Coordinates(59.9167, 10.7068, "Frogner"));
+           
             Koordinater.Add(new Coordinates(59.9261, 10.7757, "Grunerlokka"));
+           
             Koordinater.Add(new Coordinates(59.9380, 10.7363, "Ulleval"));
+           
             Koordinater.Add(new Coordinates(59.9411, 10.8199, "Bjerke"));
-            Koordinater.Add(new Coordinates(59.9127, 10.7318, "Sentrum"));
+
+            Koordinater.Add(new Coordinates(59.9374, 10.7272, "Vestre-Aker"));
+            
             Koordinater.Add(new Coordinates(59.9068, 10.7623, "Gamle-Oslo"));
         }
 

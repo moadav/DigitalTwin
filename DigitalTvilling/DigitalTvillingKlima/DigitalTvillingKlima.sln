@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.32106.194
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalTvillingKlima", "DigitalTvillingKlima.csproj", "{C90B6711-73D2-40C0-B7D3-82FCF064B3D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalTvillingSykkel", "..\DigitalTvillingSykkel\DigitalTvillingSykkel.csproj", "{A702C95D-23CF-479D-9605-D6839B818DE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalTvillingSykkel", "..\DigitalTvillingSykkel\DigitalTvillingSykkel.csproj", "{A702C95D-23CF-479D-9605-D6839B818DE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalTwinPublisher", "..\DigitalTwinPublisher\DigitalTwinPublisher.csproj", "{81537AC4-DE3E-44CD-8288-0C18442D3D1A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{A702C95D-23CF-479D-9605-D6839B818DE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A702C95D-23CF-479D-9605-D6839B818DE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A702C95D-23CF-479D-9605-D6839B818DE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81537AC4-DE3E-44CD-8288-0C18442D3D1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81537AC4-DE3E-44CD-8288-0C18442D3D1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81537AC4-DE3E-44CD-8288-0C18442D3D1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81537AC4-DE3E-44CD-8288-0C18442D3D1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
