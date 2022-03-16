@@ -14,7 +14,7 @@ namespace DigitalTvillingSykkel.DigitalTwinRun
 {
     public class DigitalTwinSykkelRun
     {
-        DigitalTwinsClient Client = DigitalTwinsInstansiateClient.DigitalTwinsClient(new Uri("https://dthiofadt.api.weu.digitaltwins.azure.net"));
+        DigitalTwinsClient Client = DigitalTwinsInstansiateClient.DigitalTwinsClient(new Uri(ApiSykkel.azureUrl));
 
         private int Station_Id { get; set; }
         private string Station_Name { get; set; }
