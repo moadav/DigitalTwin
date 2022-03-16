@@ -1,29 +1,16 @@
-using System;
-using System.Threading.Tasks;
+﻿using System;
 using System.Collections.Generic;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Host;
-using Microsoft.Extensions.Logging;
+using System.Text;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using BysykkelDatafetcher.utils;
-
+using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace BysykkelDatafetcher
 {
-    public static class FetcherFunction
-    {
-        [FunctionName("FetcherFunction")]
-        public static async Task RunAsync([TimerTrigger("0 0 * * * *")]TimerInfo myTimer, ILogger log)
-        {
-            log.LogInformation($"BysykkelDatafetcher function executed at: {DateTime.Now}");
-
-            await new FetchDataAndUpdate().RunAsync(log);
-        }
-    }
-
     public class FetchDataAndUpdate
     {
         public async Task RunAsync(ILogger log)
@@ -51,7 +38,7 @@ namespace BysykkelDatafetcher
                     }
                     else
                     {
-                        //Console.WriteLine($"{timestamp} station_information error code: {response.StatusCode}");
+                        Console.WriteLine($"{timestamp} station_information error code: {response.StatusCode}");
                         log.LogInformation($"{timestamp} station_information error code: {response.StatusCode}");
                     }
                 }
