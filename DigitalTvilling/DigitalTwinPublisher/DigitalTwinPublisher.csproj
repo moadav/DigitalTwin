@@ -7,6 +7,7 @@
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.13" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BysykkelDatafetcher\BysykkelDatafetcher.csproj" />
     <ProjectReference Include="..\DigitalTvillingKlima\DigitalTvillingKlima.csproj" />
     <ProjectReference Include="..\DigitalTvillingSykkel\DigitalTvillingSykkel.csproj" />
   </ItemGroup>

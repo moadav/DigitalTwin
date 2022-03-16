@@ -1,6 +1,0 @@
-{
-  "@id": "dtmi:oslo:byInfo;1",
-  "@context": "dtmi:dtdl:context;2",
-  "@type": "Interface",
-  "displayName": "By info"
-}
