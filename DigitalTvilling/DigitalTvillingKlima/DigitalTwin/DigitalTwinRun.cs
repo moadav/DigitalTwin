@@ -16,7 +16,7 @@ namespace DigitalTvillingKlima.DigitalTwin
     {
 
         private List<Coordinates> Koordinater = new List<Coordinates>();
-        DigitalTwinsClient Client = DigitalTwinsInstansiateClient.DigitalTwinsClient(new Uri("https://dthiofadt.api.weu.digitaltwins.azure.net"));
+        DigitalTwinsClient Client = DigitalTwinsInstansiateClient.DigitalTwinsClient(new Uri(Api.azureUrl));
 
         private string Weathersymbol { get; set; }
         private string Time { get; set; }

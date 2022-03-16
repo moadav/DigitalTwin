@@ -9,7 +9,7 @@ namespace DigitalTvillingSykkel
     public static class DigitalTvillingOsloSykkel
     {
         [FunctionName("SykkelData")]
-        public static void Run([TimerTrigger("0 0 * * * *")]TimerInfo myTimer, ILogger log)
+        public static void Run([TimerTrigger("0 * * * * *")]TimerInfo myTimer, ILogger log)
         {
             DigitalTwinSykkelRun a = new DigitalTwinSykkelRun();
             a.RunSykkel();

@@ -7,7 +7,7 @@ namespace DigitalTvillingSykkel
     public static class ApiSykkel
     {
         public static HttpClient Client { get; set; }
-        public static readonly string azureUrl = Environment.GetEnvironmentVariable("ADT_SERVICE_URL");
+        public static readonly string azureUrl = Environment.GetEnvironmentVariable("Azure-Twins-Url");
         public static readonly HttpClient singletonHttpClientInstance = new HttpClient();
 
         public static void InitalizeSykkelApi()
