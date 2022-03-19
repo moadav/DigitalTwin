@@ -10,6 +10,8 @@ namespace DigitalTvillingKlima
     {
         public WeatherSummary Summary { get; set; }
 
+        public WeatherNextHourDetail Details { get; set; }
+
 
     }
 }

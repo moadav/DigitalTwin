@@ -8,7 +8,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BysykkelDatafetcher\BysykkelDatafetcher.csproj" />
-    <ProjectReference Include="..\DigitalTvillingKlima\DigitalTvillingKlima.csproj" />
     <ProjectReference Include="..\DigitalTvillingSykkel\DigitalTvillingSykkel.csproj" />
   </ItemGroup>
   <ItemGroup>

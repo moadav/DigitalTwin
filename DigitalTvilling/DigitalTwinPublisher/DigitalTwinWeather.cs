@@ -5,6 +5,7 @@ using DigitalTvillingKlima.Interface;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace DigitalTvillingKlima
 {
@@ -13,9 +14,11 @@ namespace DigitalTvillingKlima
         [FunctionName("KlimaData")]
         public  static void Run([TimerTrigger("0 0 * * * *")]TimerInfo myTimer, ILogger log)
         {
-            DigitalTwinRun digitalTwinRun = new DigitalTwinRun();       
-            digitalTwinRun.Run();
-           
+            
+                DigitalTwinRun digitalTwinRun = new DigitalTwinRun();
+                digitalTwinRun.Run();
+            
+
 
         }
     }

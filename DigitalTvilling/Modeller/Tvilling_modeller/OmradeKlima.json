@@ -55,6 +55,10 @@
                 {
                   "name": "Cloud_area_fraction",
                   "schema": "double"
+                },
+                {
+                  "name": "Precipitation_amount",
+                  "schema":  "double"
                 }
               ]
             }

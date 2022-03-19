@@ -4,6 +4,7 @@ using DigitalTvillingKlima.Hjelpeklasser;
 using DigitalTvillingSykkel.ApiDesc;
 using DigitalTvillingSykkel.DigitalTwin;
 using DigitalTvillingSykkel.SykkelTvillingObjekter;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -14,7 +15,7 @@ namespace DigitalTvillingSykkel.DigitalTwinRun
 {
     public class DigitalTwinSykkelRun
     {
-        DigitalTwinsClient Client = DigitalTwinsInstansiateClient.DigitalTwinsClient(new Uri(ApiSykkel.azureUrl));
+        DigitalTwinsClient Client = DigitalTwinsInstansiateClient.DigitalTwinsClient(new Uri("https://dthiofadt.api.weu.digitaltwins.azure.net"));
 
         private int Station_Id { get; set; }
         private string Station_Name { get; set; }
@@ -36,8 +37,6 @@ namespace DigitalTvillingSykkel.DigitalTwinRun
             ApiSykkel.InitalizeSykkelApi();
             ApiResponseAsync();
             //CreateNeededTwinAndRelationshipAsync();
-
-
         }
 
 
@@ -48,42 +47,35 @@ namespace DigitalTvillingSykkel.DigitalTwinRun
                 using (HttpResponseMessage response = await ApiSykkel.Client.GetAsync($"https://gbfs.urbansharing.com/oslobysykkel.no/station_information.json"))
                 {
 
-
                     using (HttpResponseMessage response2 = await ApiSykkel.Client.GetAsync($"https://gbfs.urbansharing.com/oslobysykkel.no/station_status.json"))
                     {
-
+                        response.EnsureSuccessStatusCode();
+                        response2.EnsureSuccessStatusCode();
                         ReadResponseAsync(response, response2);
-
-
                     }
 
                 }
             }
-            catch (HttpRequestException e)
+            catch (ArgumentNullException e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e);
             }
-            catch (ArgumentNullException a)
+            catch (HttpRequestException k)
             {
-                Console.WriteLine(a.Message);
+                Console.WriteLine(k);
+            }
+            catch (JsonReaderException e)
+            {
+                Console.WriteLine(e);
             }
         }
 
         private async void ReadResponseAsync(HttpResponseMessage response, HttpResponseMessage response2)
         {
-            if (!response.IsSuccessStatusCode && !response2.IsSuccessStatusCode)
-                Console.WriteLine("Response returned unsuccesfull");
-            else
-            {
+            Station_Info station_status_data = await response2.Content.ReadAsAsync<Station_Info>();
 
-                Station_Info station_status_data = await response2.Content.ReadAsAsync<Station_Info>();
-
-                Station_Info station_info_data = await response.Content.ReadAsAsync<Station_Info>();
-                ReadValues(station_status_data, station_info_data);
-
-
-
-            }
+            Station_Info station_info_data = await response.Content.ReadAsAsync<Station_Info>();
+            ReadValues(station_status_data, station_info_data);
         }
 
         private void ReadValues(Station_Info station_status_data, Station_Info station_info_data)
@@ -110,8 +102,6 @@ namespace DigitalTvillingSykkel.DigitalTwinRun
             Station_Status station_status = new Station_Status(new Bicycle_Available(Num_bikes_Available, Num_docks_Available),
                 new Station_Availablity(Station_is_installed, Station_is_renting, Station_is_returning));
 
-
-
             CreateSykkelTwinsAsync(station_info, $"station_{Station_Id}", station_status);
         }
         private void FixValues(Stations station_Information, Stations station_Status)
@@ -129,7 +119,7 @@ namespace DigitalTvillingSykkel.DigitalTwinRun
             Station_is_returning = station_Status.Is_Returning;
             Lon = station_Information.Lon;
             Lat = station_Information.Lat;
-    }
+        }
 
 
         private async void CreateNeededTwinAndRelationshipAsync()

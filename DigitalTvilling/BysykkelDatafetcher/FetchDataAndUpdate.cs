@@ -29,8 +29,10 @@ namespace BysykkelDatafetcher
                 // station_information
                 using (HttpResponseMessage response = await httpClient.GetAsync("https://gbfs.urbansharing.com/oslobysykkel.no/station_information.json"))
                 {
+
                     if (response.IsSuccessStatusCode)
                     {
+
 
                         StationInformation stationInformation = await response.Content.ReadAsAsync<StationInformation>();
 

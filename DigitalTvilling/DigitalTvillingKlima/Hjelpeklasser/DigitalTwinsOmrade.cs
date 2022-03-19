@@ -49,6 +49,10 @@ namespace DigitalTvillingKlima.Hjelpeklasser
             {
                 Console.WriteLine($"Create twin error: {e.Status}: {e.Message}");
             }
+            catch (ArgumentNullException k)
+            {
+                Console.WriteLine("Value is null " + k);
+            }
 
         }
 
@@ -72,6 +76,9 @@ namespace DigitalTvillingKlima.Hjelpeklasser
                     CreateNewKlimaTwinsAsync(client, basicDigitalTwin);
                 else
                     Console.WriteLine($"Update twin error: {e.Status}: {e.Message}");
+            }catch(ArgumentNullException k)
+            {
+                Console.WriteLine("Value is null " + k);
             }
 
         }
