@@ -14,7 +14,6 @@ namespace BysykkelDatafetcher
 {
     public class FetchDataAndUpdate
     {
-        HttpClient httpClient { get; set; }
 
         public async Task RunAsync(ILogger log)
         {
@@ -113,13 +112,17 @@ namespace BysykkelDatafetcher
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                log.LogInformation(e.Message);
+                log.LogError(e.Message);
             }
 
             
         }
         private async Task<WeatherPoint> getWeather(ILogger log, double latitude, double longitude)
         {
+
+            HttpClient httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            httpClient.DefaultRequestHeaders.Add("User-Agent", "hiof.no - bachelorprosject");
             string timestamp = DateTimeOffset.UtcNow.DateTime.ToLocalTime().ToString("[dd-MM HH:mm]");
 
             string latGrammar = latitude.ToString("G", CultureInfo.InvariantCulture);
