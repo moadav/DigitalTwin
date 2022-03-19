@@ -4,14 +4,16 @@ using BysykkelDatafetcher;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BysykkelDatafetcher.Migrations
 {
     [DbContext(typeof(StationContext))]
-    partial class StationContextModelSnapshot : ModelSnapshot
+    [Migration("20220318045521_addWeatherTable")]
+    partial class addWeatherTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,14 +89,14 @@ namespace BysykkelDatafetcher.Migrations
                     b.Property<double>("lon")
                         .HasColumnType("float");
 
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("precipitation_amount")
                         .HasColumnType("float");
 
                     b.Property<double>("relative_humidity")
                         .HasColumnType("float");
-
-                    b.Property<string>("stationId")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("time")
                         .HasColumnType("datetime2");
@@ -107,18 +109,7 @@ namespace BysykkelDatafetcher.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("stationId")
-                        .IsUnique()
-                        .HasFilter("[stationId] IS NOT NULL");
-
                     b.ToTable("WeatherPoints");
-                });
-
-            modelBuilder.Entity("BysykkelDatafetcher.WeatherPoint", b =>
-                {
-                    b.HasOne("BysykkelDatafetcher.Station", "station")
-                        .WithOne("weatherPoint")
-                        .HasForeignKey("BysykkelDatafetcher.WeatherPoint", "stationId");
                 });
 #pragma warning restore 612, 618
         }

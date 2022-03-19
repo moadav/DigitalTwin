@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "BysykkelDatafetcher": {
+      "commandName": "Project",
+      "nativeDebugging": false
+    }
+  }
+}

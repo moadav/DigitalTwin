@@ -8,6 +8,7 @@ namespace BysykkelDatafetcher
     public class StationContext : DbContext
     {
         public DbSet<Station> Stations { get; set; }
+        public DbSet<WeatherPoint> WeatherPoints { get; set; }
         public string connectionString { get; }
 
         public StationContext()
@@ -41,5 +42,28 @@ namespace BysykkelDatafetcher
         public double lon { get; set; }
         public int capacity { get; set; }
 
+        public WeatherPoint weatherPoint { get; set; }
+    }
+
+    public class WeatherPoint
+    {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public string Id { get; set; }
+        public double lat { get; set; }
+        public double lon { get; set; }
+        public DateTime time { get; set; }
+        public double air_pressure_at_sea_level { get; set; }
+        public double air_temperature { get; set; }
+        public double cloud_area_fraction { get; set; }
+        public double relative_humidity { get; set; }
+        public double wind_from_direction { get; set; }
+        public double wind_speed { get; set; }
+        
+        //precipitation for next hour
+        public double precipitation_amount { get; set; }
+
+        [ForeignKey("station")]
+        public string stationId { get; set; }
+        public Station station { get; set; }
     }
 }
