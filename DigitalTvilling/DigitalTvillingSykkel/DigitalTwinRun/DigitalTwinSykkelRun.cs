@@ -15,7 +15,7 @@ namespace DigitalTvillingSykkel.DigitalTwinRun
 {
     public class DigitalTwinSykkelRun
     {
-        DigitalTwinsClient Client = DigitalTwinsInstansiateClient.DigitalTwinsClient(new Uri("https://dthiofadt.api.weu.digitaltwins.azure.net"));
+        DigitalTwinsClient Client = DigitalTwinsInstansiateClient.DigitalTwinsClient(new Uri(ApiSykkel.azureUrl));
 
         private int Station_Id { get; set; }
         private string Station_Name { get; set; }
@@ -36,7 +36,7 @@ namespace DigitalTvillingSykkel.DigitalTwinRun
         {
             ApiSykkel.InitalizeSykkelApi();
             ApiResponseAsync();
-            //CreateNeededTwinAndRelationshipAsync();
+            
         }
 
 
@@ -138,7 +138,7 @@ namespace DigitalTvillingSykkel.DigitalTwinRun
             };
             Client.CreateOrReplaceDigitalTwin(twinContents.Id, twinContents);
 
-            await Relationshipbuilder.CreateRelationshipAsync(Client, twinContents.Id, targetId, relationName);
+            await Relationshipbuilder.UpdateRelationshipAsync(Client, twinContents.Id, targetId, relationName);
 
         }
 
@@ -150,7 +150,7 @@ namespace DigitalTvillingSykkel.DigitalTwinRun
 
             twins.CreateTwinsAsync(Client, contents);
 
-            await Relationshipbuilder.CreateRelationshipAsync(Client, contents.Id, "Oslo_Sykler", "sykkler_har_sykkel");
+            await Relationshipbuilder.UpdateRelationshipAsync(Client, contents.Id, "Oslo_Sykler", "sykkler_har_sykkel");
 
         }
 

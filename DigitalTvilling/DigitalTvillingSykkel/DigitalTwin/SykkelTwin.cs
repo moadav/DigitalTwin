@@ -43,18 +43,36 @@ namespace DigitalTvillingSykkel.DigitalTwin
             }
             catch (RequestFailedException e)
             {
-                Console.WriteLine($"Create twin error: {e.Status}: {e.Message}");
+                Console.WriteLine($"Failed to send request: {e.Status}: {e.Message}");
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine($"Null value recieved: " + e);
             }
 
+        }
+
+        private async void DeleteTwin(DigitalTwinsClient client, string twinId)
+        {
+            try
+            {
+                await client.DeleteDigitalTwinAsync(twinId);
+                Console.WriteLine($"Twin {twinId} deleted ");
+            }
+            catch (RequestFailedException e)
+            {
+                Console.WriteLine($"Failed to find twin: " + e);
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine("Null value recieved: " + e);
+            }
         }
 
         private async void UpdateKlimaTwinsAsync(DigitalTwinsClient client, BasicDigitalTwin basicDigitalTwin)
         {
             try
             {
-
-             
-
                 var updateTwins = new JsonPatchDocument();
 
 
@@ -70,22 +88,20 @@ namespace DigitalTvillingSykkel.DigitalTwin
                 if (e.Status == 404)
                     CreateNewSykkelTwinsAsync(client, basicDigitalTwin);
                 else
-                    Console.WriteLine($"Update twin error: {e.Status}: {e.Message}");
+                    Console.WriteLine($"Failed to send request: {e.Status}: {e.Message}");
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine($"Value Null recieved: " + e);
             }
 
         }
 
         public void CreateTwinsAsync(DigitalTwinsClient client, BasicDigitalTwin basicDigitalTwin)
         {
-            try
-            {
 
-                UpdateKlimaTwinsAsync(client, basicDigitalTwin);
-            }
-            catch (RequestFailedException e)
-            {
-                Console.WriteLine($"Create twin error: {e.Status}: {e.Message}");
-            }
+            UpdateKlimaTwinsAsync(client, basicDigitalTwin);
+
         }
 
 

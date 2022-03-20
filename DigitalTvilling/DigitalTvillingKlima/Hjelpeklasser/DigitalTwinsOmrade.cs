@@ -41,19 +41,36 @@ namespace DigitalTvillingKlima.Hjelpeklasser
         {
             try
             {
-                
+
                 await client.CreateOrReplaceDigitalTwinAsync<BasicDigitalTwin>(basicDigitalTwin.Id, basicDigitalTwin);
                 Console.WriteLine($"Created twin: {basicDigitalTwin.Id} successfully");
             }
             catch (RequestFailedException e)
             {
-                Console.WriteLine($"Create twin error: {e.Status}: {e.Message}");
+                Console.WriteLine($"failed to send create request: {e.Status}: {e.Message}");
             }
             catch (ArgumentNullException k)
             {
-                Console.WriteLine("Value is null " + k);
+                Console.WriteLine("Null value recieved " + k);
             }
 
+        }
+
+        private async void DeleteTwin(DigitalTwinsClient client, string twinId)
+        {
+            try
+            {
+                await client.DeleteDigitalTwinAsync(twinId);
+                Console.WriteLine($"Twin {twinId} deleted ");
+            }
+            catch (RequestFailedException e )
+            {
+                Console.WriteLine($"Failed to find twin: " + e);
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine("Null value recieved: " + e);
+            }
         }
 
         private async void UpdateKlimaTwinsAsync(DigitalTwinsClient client, BasicDigitalTwin basicDigitalTwin)
@@ -63,10 +80,10 @@ namespace DigitalTvillingKlima.Hjelpeklasser
 
                 var updateTwins = new JsonPatchDocument();
 
-              
-                 updateTwins.AppendReplace("/weather", basicDigitalTwin.Contents["weather"]);
 
-                 await client.UpdateDigitalTwinAsync(basicDigitalTwin.Id, updateTwins);
+                updateTwins.AppendReplace("/weather", basicDigitalTwin.Contents["weather"]);
+
+                await client.UpdateDigitalTwinAsync(basicDigitalTwin.Id, updateTwins);
 
                 Console.WriteLine($"Digital twin {basicDigitalTwin.Id} updated succesfully");
             }
@@ -75,25 +92,18 @@ namespace DigitalTvillingKlima.Hjelpeklasser
                 if (e.Status == 404)
                     CreateNewKlimaTwinsAsync(client, basicDigitalTwin);
                 else
-                    Console.WriteLine($"Update twin error: {e.Status}: {e.Message}");
-            }catch(ArgumentNullException k)
+                    Console.WriteLine($"Failed to send update request: {e.Status}: {e.Message}");
+            }
+            catch (ArgumentNullException k)
             {
-                Console.WriteLine("Value is null " + k);
+                Console.WriteLine("Null value recieved: " + k);
             }
 
         }
 
         public void CreateTwinsAsync(DigitalTwinsClient client, BasicDigitalTwin basicDigitalTwin)
         {
-            try
-            {
-
                 UpdateKlimaTwinsAsync(client, basicDigitalTwin);
-            }
-            catch (RequestFailedException e)
-            {
-                Console.WriteLine($"Create twin error: {e.Status}: {e.Message}");
-            }
         }
     }
 }
