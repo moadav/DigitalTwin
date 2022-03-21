@@ -32,7 +32,6 @@ namespace DigitalTvillingKlima.Hjelpeklasser
             {
                 Console.WriteLine("Value is null " + k);
             }
-
         }
 
         private static async void CreateNewRelationship(DigitalTwinsClient client, string digitalTwinSrcId, string relId, string digitalTwinTargetId, string nameId)
@@ -51,8 +50,6 @@ namespace DigitalTvillingKlima.Hjelpeklasser
             {
                 Console.WriteLine("Value is null " + k);
             }
-
-
         }
         private static async void DeleteRelationship(DigitalTwinsClient client, string relId, string twinId)
         {
@@ -76,8 +73,5 @@ namespace DigitalTvillingKlima.Hjelpeklasser
             };
             return relationship;
         }
-
-
-
     }
 }

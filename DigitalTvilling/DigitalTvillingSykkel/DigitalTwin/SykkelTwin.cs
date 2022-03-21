@@ -9,25 +9,26 @@ namespace DigitalTvillingSykkel.DigitalTwin
 {
     public class SykkelTwin
     {
-
+        readonly string sykkel_tilgjengelighet_modelId = "dtmi:oslo:sykkler:sykkel;1";
+        readonly string sykkel_status_property_name = "Station_Status";
+        readonly string sykkel_tilgjengelighet_property_name = "Station_information";
+        readonly string sykkel_tilgjengelighet_component_name = "Bicycle_Status";
         public BasicDigitalTwin CreateSykkelTwinContents(Station_Information station_Information, string idNavn, Station_Status station_Status)
         {
+            
             var twinContents = new BasicDigitalTwin()
             {
                 Metadata = {
-                    ModelId = "dtmi:oslo:sykkler:sykkel;1"
+                    ModelId = sykkel_tilgjengelighet_modelId
                 },
                 Contents =
                 {
-                    {"Station_information",  station_Information},
-                    { "Bicycle_Status", new BasicDigitalTwinComponent { Contents ={  {"Station_Status", station_Status } } } }
+                    {sykkel_tilgjengelighet_property_name,  station_Information},
+                    { sykkel_tilgjengelighet_component_name, new BasicDigitalTwinComponent { Contents ={  { sykkel_status_property_name, station_Status } } } }
 
                 },
                 Id = idNavn
-
-
             };
-
             return twinContents;
         }
 
@@ -52,7 +53,7 @@ namespace DigitalTvillingSykkel.DigitalTwin
 
         }
 
-        private async void DeleteTwin(DigitalTwinsClient client, string twinId)
+        private async void DeleteTwinAsync(DigitalTwinsClient client, string twinId)
         {
             try
             {
@@ -75,9 +76,8 @@ namespace DigitalTvillingSykkel.DigitalTwin
             {
                 var updateTwins = new JsonPatchDocument();
 
-
-                updateTwins.AppendReplace("/Bicycle_Status", basicDigitalTwin.Contents["Bicycle_Status"]);
-                updateTwins.AppendReplace("/Station_information", basicDigitalTwin.Contents["Station_information"]);
+                updateTwins.AppendReplace("/" + sykkel_tilgjengelighet_component_name, basicDigitalTwin.Contents[sykkel_tilgjengelighet_component_name]);
+                updateTwins.AppendReplace("/" + sykkel_tilgjengelighet_property_name, basicDigitalTwin.Contents[sykkel_tilgjengelighet_property_name]);
 
                 await client.UpdateDigitalTwinAsync(basicDigitalTwin.Id, updateTwins);
 

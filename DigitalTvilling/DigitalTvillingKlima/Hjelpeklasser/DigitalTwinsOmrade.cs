@@ -12,19 +12,22 @@ namespace DigitalTvillingKlima.Hjelpeklasser
 {
     public class DigitalTwinsOmrade : IDigitalTwinsKlimaBuilder
     {
-
-
+        readonly string model_Omrade_Klima_modelId = "dtmi:omrade:sted;1";
+        readonly string omrade_Klima_Property_Name = "KlimaInfo";
+        readonly string digitaltwins_Component_Name = "weather";
         public BasicDigitalTwin CreateOmradeTwinContents(KlimaInfo klimaInfo, string idNavn, Coordinates coordinates)
         {
+           
+
             var twinContents = new BasicDigitalTwin()
             {
                 Metadata = {
-                    ModelId = "dtmi:omrade:sted;1"
+                    ModelId = model_Omrade_Klima_modelId
                 },
                 Contents =
                 {
                     {"Coordinates",  coordinates},
-                    { "weather", new BasicDigitalTwinComponent { Contents ={  {"KlimaInfo", klimaInfo } } } }
+                    { "weather", new BasicDigitalTwinComponent { Contents ={  { omrade_Klima_Property_Name, klimaInfo } } } }
 
                 },
                 Id = idNavn
@@ -41,7 +44,6 @@ namespace DigitalTvillingKlima.Hjelpeklasser
         {
             try
             {
-
                 await client.CreateOrReplaceDigitalTwinAsync<BasicDigitalTwin>(basicDigitalTwin.Id, basicDigitalTwin);
                 Console.WriteLine($"Created twin: {basicDigitalTwin.Id} successfully");
             }
@@ -63,7 +65,7 @@ namespace DigitalTvillingKlima.Hjelpeklasser
                 await client.DeleteDigitalTwinAsync(twinId);
                 Console.WriteLine($"Twin {twinId} deleted ");
             }
-            catch (RequestFailedException e )
+            catch (RequestFailedException e)
             {
                 Console.WriteLine($"Failed to find twin: " + e);
             }
@@ -77,11 +79,10 @@ namespace DigitalTvillingKlima.Hjelpeklasser
         {
             try
             {
-
+               
                 var updateTwins = new JsonPatchDocument();
 
-
-                updateTwins.AppendReplace("/weather", basicDigitalTwin.Contents["weather"]);
+                updateTwins.AppendReplace("/" + digitaltwins_Component_Name, basicDigitalTwin.Contents[digitaltwins_Component_Name]);
 
                 await client.UpdateDigitalTwinAsync(basicDigitalTwin.Id, updateTwins);
 
@@ -103,7 +104,7 @@ namespace DigitalTvillingKlima.Hjelpeklasser
 
         public void CreateTwinsAsync(DigitalTwinsClient client, BasicDigitalTwin basicDigitalTwin)
         {
-                UpdateKlimaTwinsAsync(client, basicDigitalTwin);
+            UpdateKlimaTwinsAsync(client, basicDigitalTwin);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace DigitalTvillingSykkel
             Client.DefaultRequestHeaders.Accept.Clear();
             Client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
-            Client.DefaultRequestHeaders.Add("Client-Identifier", "DigitalTvilling - hiof.no - sykkel data oppdateres hver time - mohammedalidavami@gmail.com - bachelorprosjekt");
+            Client.DefaultRequestHeaders.Add("Client-Identifier", "DigitalTvilling - hiof.no - sykkel data oppdateres hver time - mohammed@hiof.no - bachelorprosjekt");
 
         }
        
