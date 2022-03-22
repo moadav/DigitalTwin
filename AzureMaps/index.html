@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="IE=Edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+		<!-- Add references to the Azure Maps Map control JavaScript and CSS files. -->
+	    <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.css" type="text/css" />
+	    <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.js"></script>
+
+	    <!-- Add a reference to the Azure Maps Services Module JavaScript file. -->
+	    <script src="https://atlas.microsoft.com/sdk/javascript/service/2/atlas-service.min.js"></script>
+
+	    <!-- Import bike stations as geojson -->
+	    <script type="text/javascript" src="./stations.js"></script>
+
+		<!-- Import auth -->
+		<script type="text/javascript" src="./auth.js"></script>
+
+	    <!-- Import css -->
+	    <link rel="stylesheet" href="index.css" type="text/css" />
+		<link rel="stylesheet" href="sidepanel.css" type="text/css" />
+
+	    <script>
+
+	    	var map, datasource, layer, popup, stationsBubbleLayer;
+
+			var bikeStations = loadStations();
+
+	   		function getMap() {
+
+				// The bounding box to limit the map view to. Format [West, South, East, North]
+				var boundingBox = [10.469355672761397, 59.79312074828016, 10.968043737033126, 60.14542186822472];
+
+				//nord - 60.14542186822472, 10.69099481243772
+				//sør -  59.79312074828016, 10.69981000549303
+				//vest - 59.98454689112727, 10.469355672761397
+				//øst -  59.96186089226926, 10.968043737033126
+
+				//Optionally center the map on the bounding box.
+				// center: atlas.data.BoundingBox.getCenter(boundingBox)
+
+				var map_center = [10.749157071677077, 59.914989624346035];
+				var map_zoom = 11;
+				var map_view = 'Auto';
+				var map_style = "grayscale_light";
+
+				var auth = getAuth();
+
+				var map_options = {
+							maxBounds: boundingBox,
+							//center: map_center,
+							center: atlas.data.BoundingBox.getCenter(boundingBox),		                
+							zoom: map_zoom,
+							view: map_view,
+							style: map_style,
+							showLogo: false,
+							showFeedbackLink: false,
+							authOptions: auth,
+				}
+
+	            // Initialize a map instance.
+	            map = new atlas.Map('myMap', map_options); // 'myMap' = id of div to render map
+
+
+				// -------------------------------------------------------------------------------------------
+                // Testing Route drawing	
+                /*
+				//Use MapControlCredential to share authentication between a map control and the service module.
+	            var pipeline = atlas.service.MapsURL.newPipeline(new atlas.service.MapControlCredential(map));
+
+	            //Construct the RouteURL object
+	            routeURL = new atlas.service.RouteURL(pipeline);
+	            */
+	            // -------------------------------------------------------------------------------------------
+
+
+	            // Wait until the map resources are ready before adding controls.
+	            map.events.add('ready', function () {
+
+            		// Add the zoom control to the map.
+	                map.controls.add(new atlas.control.ZoomControl(), {
+	                    position: 'top-right'
+	                });
+
+	            	// Create a reusable popup.
+                	popup = new atlas.Popup();
+
+                	// Initiate DataSource and add to map
+                	datasource = new atlas.source.DataSource();
+                	map.sources.add(datasource);
+
+					// Add bike stations and boundingbox(?) to the data source.
+					datasource.add(bikeStations);
+					//datasource.setShapes(stasjoner);
+
+
+					// Add BoundingBox points to datasource to draw line?
+					//datasource.add(atlas.math.boundingBoxToPolygon(boundingBox));
+					
+					// Add BubbleLayer for stations points
+					stationsBubbleLayer = new atlas.layer.BubbleLayer(datasource, null, {
+						radius: 4,
+					    strokeColor: "#4288f7",
+					    strokeWidth: 2, 
+					    //color: "white" 
+						color: "#4288f7",
+						pitchAlignment: "viewport",
+					});
+					map.layers.add(stationsBubbleLayer);
+
+					// Add click event for station popup
+                	map.events.add('click', stationsBubbleLayer, featureClicked);
+                	
+
+                	// -------------------------------------------------------------------------------------------
+                	// Testing Line Layer
+
+					/*
+                	//Add line to data source.
+                	datasource.add(new atlas.data.LineString([[10.757376666842816, 59.91629601075576], [10.749958763650312, 59.91323316606503]]));
+
+                	//Create a layer to render the line data.
+	                lineLayer = new atlas.layer.LineLayer(datasource);
+	                map.layers.add(lineLayer);
+					*/
+
+	                // -------------------------------------------------------------------------------------------
+
+
+                	// -------------------------------------------------------------------------------------------
+                	// Testing Route drawing
+
+                	/*
+                	//Create a layer for rendering the route line under the road labels.
+	                map.layers.add(new atlas.layer.LineLayer(datasource, null, {
+	                    strokeColor: '#2272B9',
+	                    strokeWidth: 5,
+	                    lineJoin: 'round',
+	                    lineCap: 'round'
+	                }), 'labels');
+
+	                //Get the coordnates of the start and end points.
+	                var coordinates = [
+	                	stasjoner.features[0].geometry.coordinates,
+	                	stasjoner.features[1].geometry.coordinates,
+	                ];
+
+	                //Calculate a route.
+	                routeURL.calculateRouteDirections(atlas.service.Aborter.timeout(10000), coordinates, {
+	                	travelMode: "bicycle",
+	                }).then((directions) => {
+	                    //Get the route data as GeoJSON and add it to the data source.
+	                    var data = directions.geojson.getFeatures();
+	                    datasource.add(data);
+	                });
+	                */
+
+
+	                // -------------------------------------------------------------------------------------------
+	     
+            	});
+        	}
+
+
+       
+        	function bubbleClicked(e) {
+
+    			// Make sure the event occurred on a shape feature.
+	            if (e.shapes && e.shapes.length > 0) {
+
+	                // Since the data is coming from a vector tile source, it will be a raw GeoJSON feature and not a Shape class.
+	                var f = e.shapes[0];
+
+	                // If the shape is a Point, use its coordinates to position the popup, otherwise use the mouse location.
+	                var pos = (f.geometry.type === 'Point') ? f.geometry.coordinates : e.position;
+
+	                // Update the content and position of the popup.
+	                popup.setOptions({
+	                    // Apply a template to the properties of the shape feature. 
+	                    content: atlas.PopupTemplate.applyTemplate(f.properties),
+	                    position: pos
+	                });
+
+	                // Open the popup.
+	                popup.open(map);
+	            }
+        	}
+        	
+
+        	function featureClicked(e) {
+
+            // Make sure the event occurred on a shape feature.
+            if (e.shapes && e.shapes.length > 0) {
+
+                // By default, show the popup where the mouse event occurred.
+                var pos = e.position;
+                var offset = [0, 0];
+                var properties;
+
+                console.log(e);
+
+
+                if (e.shapes[0] instanceof atlas.Shape) {
+                    properties = e.shapes[0].getProperties();
+
+                    // If the shape is a point feature, show the popup at the points coordinate.
+                    if (e.shapes[0].getType() === 'Point') {
+                        pos = e.shapes[0].getCoordinates();
+                        offset = [0, -18];
+                    }
+                } else {
+                    properties = e.shapes[0].properties;
+
+                    // If the shape is a point feature, show the popup at the points coordinate.
+                    if (e.shapes[0].type === 'Point') {
+                        pos = e.shapes[0].geometry.coordinates;
+                        offset = [0, -18];
+                    }
+                }
+
+                // Update the content and position of the popup.
+                popup.setOptions({
+                    // Create a table from the properties in the feature.
+                    content: atlas.PopupTemplate.applyTemplate(properties),
+                    position: pos,
+                    pixelOffset: offset
+                });
+                
+                //Open the popup.
+                popup.open(map);
+            }
+        }
+
+        function updateStations() {
+			
+			let stationsCheckbox = document.getElementById("show_stations_checkbox");
+
+			if(stationsCheckbox.checked) {
+				stationsBubbleLayer.setOptions({visible: true})
+			} else {
+				stationsBubbleLayer.setOptions({visible: false})
+			}
+		}
+
+
+		function testWeather() {
+			console.log("Testing weather API..");
+
+
+
+		}
+
+
+	    </script>
+	</head>
+
+	<!--<body onload="getMap()"> -->
+	<body>
+
+		
+		<div class="sidepanel">
+			
+			<h3>Weather</h3>
+
+			<button onclick="testWeather()">Test Weather API</button>
+
+
+			<h3>Stations</h3>
+			<label for="show_stations_checkbox">Show Stations</label>
+			<input type="checkbox" id="show_stations_checkbox" value="1" checked="checked" onClick="updateStations()" />
+
+		</div>
+		
+	
+
+	    <div id="myMap"></div>
+
+
+	</body>
+
+</html>
+
