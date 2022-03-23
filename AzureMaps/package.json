@@ -5,7 +5,8 @@
   "main": "stations.js",
   "dependencies": {
     "@azure/digital-twins-core": "^1.0.3",
-    "@azure/identity": "^2.0.4"
+    "@azure/identity": "^2.0.4",
+    "ix": "^4.5.2"
   },
   "devDependencies": {},
   "scripts": {

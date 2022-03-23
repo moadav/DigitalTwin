@@ -19,6 +19,10 @@
 		<!-- Import auth -->
 		<script type="text/javascript" src="./auth.js"></script>
 
+
+		<!-- Import getDigitalTwin -->
+		<scipt type="text/javascript" src="./test.js"></scipt>
+
 	    <!-- Import css -->
 	    <link rel="stylesheet" href="index.css" type="text/css" />
 		<link rel="stylesheet" href="sidepanel.css" type="text/css" />
@@ -249,7 +253,9 @@
 		function testWeather() {
 			console.log("Testing weather API..");
 
-
+			getDigitalTwin("SELECT * FROM digitaltwins WHERE $dtId = 'Nordstrand'").then( r => {
+    			console.log(r)
+			});		
 
 		}
 
