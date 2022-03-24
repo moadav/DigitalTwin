@@ -1,6 +1,11 @@
-const { DigitalTwinsClient, ServiceClientCredentials } = require("@azure/digital-twins-core");
-const { DefaultAzureCredential } = require("@azure/identity");
-const { toArray } = require("ix/asynciterable");
+//const { DigitalTwinsClient } = require("@azure/digital-twins-core");
+//const { DefaultAzureCredential } = require("@azure/identity");
+//const { toArray } = require("ix/asynciterable");
+
+import { DigitalTwinsClient } from "@azure/digital-twins-core";
+import { DefaultAzureCredential } from "@azure/identity";
+//import { toArray } from "/node_modules/ix/asynciterable/index.js";
+import { toArray } from 'ix/asynciterable/index.js';
 
 const dt_link = "https://dthiofadt.api.weu.digitaltwins.azure.net";
 const client = new DigitalTwinsClient(dt_link, new DefaultAzureCredential());
@@ -15,14 +20,12 @@ async function getDigitalTwin(id) {
 
     let items2 = await toArray(items);
     
-    return items2[0].value;
+    return items2[0];
 }
 
 getDigitalTwin("SELECT * FROM digitaltwins WHERE $dtId = 'Nordstrand'").then( r => {
     console.log(r)
 });
-
-
 
 
 

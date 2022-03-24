@@ -1,13 +1,16 @@
 {
-  "name": "AzureMaps",
+  "name": "azure-maps",
   "version": "1.0.0",
   "description": "",
-  "main": "stations.js",
+  "main": "test.js",
   "dependencies": {
     "@azure/digital-twins-core": "^1.0.3",
     "@azure/identity": "^2.0.4",
-    "ix": "^4.5.2"
+    "ix": "^4.5.2",
+    "require": "^2.4.20",
+    "serve": "^13.0.2"
   },
+  "type": "module",
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
