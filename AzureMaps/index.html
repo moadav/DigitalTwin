@@ -246,31 +246,50 @@
 		}
 
 
-		function testWeather() {
-			console.log("Testing weather API..");
+		async function test() {
 
-
+			await fetch('http://localhost:8080/digitaltwin')
+			.then(r => {
+				return r.json();
+			})
+			.then(data => {
+				console.log(data);
+				let weatherType = getWeatherType(data);
+				console.log(weatherType);
+				document.getElementById('weather').innerHTML = weatherType;
+			})
+			.catch(error => {
+				console.log(error);
+			});
 
 		}
+
+
+function getWeatherType(data) {
+return data.dt.value[0].weather.KlimaInfo.Symbole_code;
+}
 
 
 	    </script>
 	</head>
 
-	<!--<body onload="getMap()"> -->
-	<body>
+	<body onload="getMap()"> 
+	<!--<body>-->
 
 		
 		<div class="sidepanel">
 			
 			<h3>Weather</h3>
 
-			<button onclick="testWeather()">Test Weather API</button>
+			<button onclick="test()">Test Weather API</button>
 
 
 			<h3>Stations</h3>
 			<label for="show_stations_checkbox">Show Stations</label>
 			<input type="checkbox" id="show_stations_checkbox" value="1" checked="checked" onClick="updateStations()" />
+
+
+			<p id="weather"></p>
 
 		</div>
 		
