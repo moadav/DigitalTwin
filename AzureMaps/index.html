@@ -29,6 +29,9 @@
     <link rel="stylesheet" href="index.css" type="text/css" />
     <link rel="stylesheet" href="sidepanel.css" type="text/css" />
 
+    <!-- Import logic to handle weather -->
+    <script type="text/javascript" src="./weatherHandler.js"></script>
+
     <script>
       var map, datasource, layer, popup, stationsBubbleLayer
 
@@ -235,36 +238,25 @@
           stationsBubbleLayer.setOptions({ visible: false })
         }
       }
-
-      async function test() {
-        await fetch("http://localhost:8080/digitaltwin")
-          .then((r) => {
-            return r.json()
-          })
-          .then((data) => {
-            console.log(data)
-            let weatherType = getWeatherType(data)
-            console.log(weatherType)
-            document.getElementById("weather").innerHTML = weatherType
-          })
-          .catch((error) => {
-            console.log(error)
-          })
-      }
-
-      function getWeatherType(data) {
-        return data.dt.value[0].weather.KlimaInfo.Symbole_code
-      }
     </script>
   </head>
 
-  <body onload="getMap()">
-    <!--<body>-->
-
+  <!-- <body onload="getMap()"> -->
+  <body>
     <div class="sidepanel">
       <h3>Weather</h3>
+      <section id="weatherSection">
+        <img
+          id="weatherIcon"
+          src="./weatherIcons/svg/heavyrainshowers_day.svg"
+        />
+        <div id="temperature">
+          <span id="degrees">9</span>
+          <span class="celcius">&deg;C</span>
+        </div>
+      </section>
 
-      <button onclick="test()">Test Weather API</button>
+      <!-- <button onclick="updateWeather()">Test Weather API</button> -->
 
       <h3>Stations</h3>
       <label for="show_stations_checkbox">Show Stations</label>
