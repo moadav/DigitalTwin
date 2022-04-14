@@ -203,30 +203,88 @@
         }
       }
 
+      function openTab(event, tabName) {
+        let tabs = document.getElementsByClassName("tab");
+        for (let i = 0; i < tabs.length; i++) {
+          tabs[i].style.display = "none";
+        } 
+
+        let tablinks = document.getElementsByClassName("tabLinks");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        document.getElementById(tabName).style.display = "block";
+        event.currentTarget.className += " active";
+      }
+
+      async function test() {
+        await fetch('http://localhost:8080/bikestations')
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            console.log(data[0]);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+      }
+
     </script>
   </head>
 
   <!-- <body onload="getMap()"> -->
-  <body onload="getMap()">
+  <body>
+
     <div class="sidepanel">
-      <h3>Weather</h3>
-      <section id="weatherSection">
-        <img id="weatherIcon"/>
-        <div id="temperature">
-          <span id="degrees">9</span>
-          <span class="celcius">&deg;C</span>
-        </div>
-      </section>
 
-      <!-- <button onclick="updateWeather()">Test Weather API</button> -->
+      <!-- Navigation Tabs -->
+      <div class="tabpanel">
+        <button class="tabLinks active" onclick="openTab(event, 'dashboardTab')">Dashboard</button>
+        <button class="tabLinks" onclick="openTab(event, 'simulationTab')">Simulation</button>
+      </div>
 
-      <h3>Stations</h3>
-      <label for="show_stations_checkbox">Show Stations</label>
-      <input type="checkbox" id="show_stations_checkbox" value="1" checked="checked" onClick="updateShowStations()"/>
 
-      <p id="weather"></p>
+      <!-- Dashboard Tab -->
+      <div class="tab" id="dashboardTab">
+        <h3>Weather</h3>
+        <section id="weatherSection">
+          <img id="weatherIcon"/>
+          <div id="temperature">
+            <span id="degrees">9</span>
+            <span class="celcius">&deg;c</span>
+          </div>
+        </section>
+
+        <h3>Stations</h3>
+        <label for="show_stations_checkbox">Show Stations</label>
+        <input type="checkbox" id="show_stations_checkbox" value="1" checked="checked" onClick="updateShowStations()"/>
+      </div>
+   
+      <!-- Simulation Tab -->
+      <div class="tab" id="simulationTab" style="display:none">
+        <h3>Find available bikes</h3>
+
+        <form>
+          <select name="bydel" id="selectBydel">
+            <option value="bydel">Velg bydel...</option>
+
+
+          </select>
+
+
+        </form>
+
+        <button type="button" onclick="test()">Test..</button>
+
+      </div>
+
+  
     </div>
+    <!-- Sidepanel end -->
 
     <div id="myMap"></div>
+
   </body>
 </html>

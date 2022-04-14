@@ -23,14 +23,14 @@
   background-color: #01848f;
 } */
 
-.sidepanel #weatherSection {
+#dashboardTab #weatherSection {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
-.sidepanel #weatherSection span {
+#dashboardTab #weatherSection span {
   font-size: 1.8em;
 }
 
@@ -45,7 +45,34 @@
   position: inherit;
 }
 
-.sidepanel > #weatherSection > img {
+#dashboardTab > #weatherSection > img {
   max-width: 3em;
   max-height: 3em;
 }
+
+.tabpanel {
+  display:flex;
+  flex-direction: row;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+
+.tabpanel button {
+  background-color: inherit;
+  flex:auto;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+.tabpanel button:hover {
+  background-color: #ddd;
+}
+
+.tabpanel button.active {
+  background-color: #ccc;
+}
+
+
