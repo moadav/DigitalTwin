@@ -3,17 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="IE=Edge" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
     <!-- Add references to the Azure Maps Map control JavaScript and CSS files. -->
-    <link
-      rel="stylesheet"
-      href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.css"
-      type="text/css"
-    />
+    <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.css" type="text/css"/>
     <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.js"></script>
 
     <!-- Add a reference to the Azure Maps Services Module JavaScript file. -->
@@ -32,17 +25,20 @@
     <!-- Import logic to handle weather -->
     <script type="text/javascript" src="./weatherHandler.js"></script>
 
+    <!-- Import station update functions -->
+    <script type="text/javascript" src="./updateStations.js"></script>
+
     <script>
       var map, datasource, layer, popup, stationsBubbleLayer
 
       var bikeStations = loadStations()
 
-      function getMap() {
+      async function getMap() {
+
+        await updateStations(bikeStations);
+
         // The bounding box to limit the map view to. Format [West, South, East, North]
-        var boundingBox = [
-          10.469355672761397, 59.79312074828016, 10.968043737033126,
-          60.14542186822472,
-        ]
+        var boundingBox = [10.469355672761397, 59.79312074828016, 10.968043737033126, 60.14542186822472]
 
         //nord - 60.14542186822472, 10.69099481243772
         //sør -  59.79312074828016, 10.69981000549303
@@ -71,6 +67,7 @@
           authOptions: auth,
         }
 
+        
         // Initialize a map instance.
         map = new atlas.Map("myMap", map_options) // 'myMap' = id of div to render map
 
@@ -196,7 +193,7 @@
           var offset = [0, 0]
           var properties
 
-          console.log(e)
+          //console.log(e)
 
           if (e.shapes[0] instanceof atlas.Shape) {
             properties = e.shapes[0].getProperties()
@@ -229,27 +226,15 @@
         }
       }
 
-      function updateStations() {
-        let stationsCheckbox = document.getElementById("show_stations_checkbox")
-
-        if (stationsCheckbox.checked) {
-          stationsBubbleLayer.setOptions({ visible: true })
-        } else {
-          stationsBubbleLayer.setOptions({ visible: false })
-        }
-      }
     </script>
   </head>
 
   <!-- <body onload="getMap()"> -->
-  <body>
+  <body onload="getMap()">
     <div class="sidepanel">
       <h3>Weather</h3>
       <section id="weatherSection">
-        <img
-          id="weatherIcon"
-          src="./weatherIcons/svg/heavyrainshowers_day.svg"
-        />
+        <img id="weatherIcon" src="./weatherIcons/svg/heavyrainshowers_day.svg"/>
         <div id="temperature">
           <span id="degrees">9</span>
           <span class="celcius">&deg;C</span>
@@ -260,13 +245,7 @@
 
       <h3>Stations</h3>
       <label for="show_stations_checkbox">Show Stations</label>
-      <input
-        type="checkbox"
-        id="show_stations_checkbox"
-        value="1"
-        checked="checked"
-        onClick="updateStations()"
-      />
+      <input type="checkbox" id="show_stations_checkbox" value="1" checked="checked" onClick="updateShowStations()"/>
 
       <p id="weather"></p>
     </div>
