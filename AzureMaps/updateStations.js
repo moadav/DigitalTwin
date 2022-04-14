@@ -16,6 +16,7 @@ function updateBikeStations(bikeStations, data) {
     // bikeStations = stations.js (geojson object)
     // data = data from digital twin (real time data)
 
+    
     // convert data from digital twin to map
     let bikeStationsMap = new Map();
 
