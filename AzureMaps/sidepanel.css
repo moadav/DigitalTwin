@@ -1,0 +1,51 @@
+.sidepanel {
+  position: absolute;
+  height: 100vh;
+  background-color: #01848f;
+  width: 20%;
+  min-width: 100px;
+  margin-left: 0;
+  z-index: 2;
+  font-size: 1.5em;
+  line-height: 1.5em;
+  color: #f1f1f2;
+  font-family: Helvetica;
+  text-align: center;
+  box-shadow: 5px 0px 8px grey;
+}
+
+/* .sidepanel span {
+  position: relative;
+  display: block;
+  width: calc(100% - 2em);
+  min-width: 100px;
+  padding: 1em;
+  background-color: #01848f;
+} */
+
+.sidepanel #weatherSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidepanel #weatherSection span {
+  font-size: 1.8em;
+}
+
+#temperature {
+  position: relative;
+}
+
+#temperature > span.celcius {
+  font-size: 0.8em;
+  vertical-align: top;
+  top: -0.4em;
+  position: inherit;
+}
+
+.sidepanel > #weatherSection > img {
+  max-width: 3em;
+  max-height: 3em;
+}
