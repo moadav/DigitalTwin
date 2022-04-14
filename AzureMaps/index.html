@@ -19,6 +19,8 @@
 		<!-- Import auth -->
 		<script type="text/javascript" src="./auth.js"></script>
 
+		<script type="text/javascript" src="./updateStations.js"></script>
+
 	    <!-- Import css -->
 	    <link rel="stylesheet" href="index.css" type="text/css" />
 		<link rel="stylesheet" href="sidepanel.css" type="text/css" />
@@ -28,8 +30,14 @@
 	    	var map, datasource, layer, popup, stationsBubbleLayer;
 
 			var bikeStations = loadStations();
+			
 
-	   		function getMap() {
+	   		async function getMap() {
+
+
+				await updateStations(bikeStations);
+				
+				//updateStations(bikeStations);
 
 				// The bounding box to limit the map view to. Format [West, South, East, North]
 				var boundingBox = [10.469355672761397, 59.79312074828016, 10.968043737033126, 60.14542186822472];
@@ -200,8 +208,7 @@
                 var offset = [0, 0];
                 var properties;
 
-                console.log(e);
-
+                //console.log(e);
 
                 if (e.shapes[0] instanceof atlas.Shape) {
                     properties = e.shapes[0].getProperties();
@@ -234,6 +241,7 @@
             }
         }
 
+		/*
         function updateStations() {
 			
 			let stationsCheckbox = document.getElementById("show_stations_checkbox");
@@ -244,50 +252,43 @@
 				stationsBubbleLayer.setOptions({visible: false})
 			}
 		}
+		*/
 
-
-		async function test() {
-
-			await fetch('http://localhost:8080/digitaltwin')
-			.then(r => {
-				return r.json();
-			})
-			.then(data => {
-				console.log(data);
-				let weatherType = getWeatherType(data);
-				console.log(weatherType);
-				document.getElementById('weather').innerHTML = weatherType;
-			})
-			.catch(error => {
-				console.log(error);
-			});
-
+		/*
+		async function getBikeStations() {
+			await fetch('http://localhost:8080/bikestations')
+				.then(response => {
+					return response.json();
+				})
+				.then(data => {
+					console.log(data)
+					//updateBikeStations(data);
+				})
+				.catch(error => {
+					console.log(error);
+				});
 		}
-
-		
-		function getWeatherType(data) {
-			return data.dt.value[0].weather.KlimaInfo.Symbole_code;
-		}
-		
+		*/
 
 
 	    </script>
 	</head>
 
-	<body onload="getMap()"> 
-	<!--<body>-->
+	<body onload="getMap()">
+	<!--<body onload="updateStations(bikeStations)">-->
 
 		
 		<div class="sidepanel">
 			
 			<h3>Weather</h3>
 
-			<button onclick="test()">Test Weather API</button>
+			<button onclick="updateStations(bikeStations)">Test Weather API</button>
 
 
 			<h3>Stations</h3>
 			<label for="show_stations_checkbox">Show Stations</label>
 			<input type="checkbox" id="show_stations_checkbox" value="1" checked="checked" onClick="updateStations()" />
+			
 
 
 			<p id="weather"></p>

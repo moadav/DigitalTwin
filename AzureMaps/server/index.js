@@ -22,6 +22,32 @@ app.get('/digitaltwin', async (req, res) => {
 
 });
 
+
+app.get('/bikestations', async (req, res) => {
+
+    let bikeStations = await getDigitalTwin2("SELECT * FROM digitaltwins WHERE IS_OF_MODEL('dtmi:oslo:sykkler:sykkel;1')");
+    
+    let bikeStationsArray = [...bikeStations[0].value, ...bikeStations[1].value, ...bikeStations[2].value]
+    
+
+    /*
+    let bikeStationsMap = new Map();
+
+    bikeStationsArray.forEach(object => {
+        bikeStationsMap.set(object.$dtId, object);
+    });
+
+    console.log(bikeStationsMap);
+    */
+
+
+
+    res.status(200).send(bikeStationsArray);
+})
+
+
+
+
 app.listen(PORT, () => console.log(`Server started on port ${PORT}.`));
 
 
@@ -32,12 +58,13 @@ async function getDigitalTwin(id) {
 
     let items2 = await toArray(items);
 
-    let test = {
-        test: items2[0].value[0].weather.KlimaInfo.Symbole_code
-    }
-
-    //return items2[0];
-    //return items2[0].value[0].weather.KlimaInfo ;
-    //return test;
     return items2[0];
+}
+
+async function getDigitalTwin2(id) {
+    let digitalTwinResponse = client.queryTwins(id).byPage();
+    let digitalTwinArray = await toArray(digitalTwinResponse);
+
+    return digitalTwinArray;
+    
 }
