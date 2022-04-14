@@ -163,28 +163,6 @@
         })
       }
 
-      function bubbleClicked(e) {
-        // Make sure the event occurred on a shape feature.
-        if (e.shapes && e.shapes.length > 0) {
-          // Since the data is coming from a vector tile source, it will be a raw GeoJSON feature and not a Shape class.
-          var f = e.shapes[0]
-
-          // If the shape is a Point, use its coordinates to position the popup, otherwise use the mouse location.
-          var pos =
-            f.geometry.type === "Point" ? f.geometry.coordinates : e.position
-
-          // Update the content and position of the popup.
-          popup.setOptions({
-            // Apply a template to the properties of the shape feature.
-            content: atlas.PopupTemplate.applyTemplate(f.properties),
-            position: pos,
-          })
-
-          // Open the popup.
-          popup.open(map)
-        }
-      }
-
       function featureClicked(e) {
         // Make sure the event occurred on a shape feature.
         if (e.shapes && e.shapes.length > 0) {
@@ -193,10 +171,9 @@
           var offset = [0, 0]
           var properties
 
-          //console.log(e)
-
           if (e.shapes[0] instanceof atlas.Shape) {
             properties = e.shapes[0].getProperties()
+          
 
             // If the shape is a point feature, show the popup at the points coordinate.
             if (e.shapes[0].getType() === "Point") {
