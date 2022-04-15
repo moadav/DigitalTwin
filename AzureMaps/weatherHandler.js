@@ -14,7 +14,7 @@ const updateWeather = async () => {
         svgDirectory + body.average_symbol
       }.svg`
 
-      // generate districts ONCE 
+      // generate districts ONCE
       if (addDistricts) generateDistrictsDom(body.districts)
 
       // update district values
@@ -24,7 +24,7 @@ const updateWeather = async () => {
 }
 
 /* Generate dom elements and append them to the weather section list
- * Template: 
+ * Template:
  * <li>
  *  <span class="stedNavn">Grunerlokka</span>
  *  <img class="weatherIcon" />
@@ -32,8 +32,8 @@ const updateWeather = async () => {
  *    <span class="degrees">69.9</span>
  *    <span class="celcius">&deg;C</span>
  *  </div>
- * </li> 
-*/
+ * </li>
+ */
 const generateDistrictsDom = (districts = []) => {
   addDistricts = false
 
@@ -83,19 +83,17 @@ const updateDistricts = (districts = []) => {
   for (const district of districts) {
     const { name, temperature, weatherSymbol } = district
 
+    // get container for current district
     const liContainer = document.getElementById(name)
 
+    // update weather symbol
     const weatherIcon = liContainer.querySelector("img.weatherIcon")
     weatherIcon.src = `${svgDirectory + weatherSymbol}.svg`
 
+    // update temperature
     const degrees = liContainer.querySelector("div > span.degrees")
     degrees.innerHTML = temperature
   }
-}
-
-//template
-{
-  
 }
 
 // update weather on page load
