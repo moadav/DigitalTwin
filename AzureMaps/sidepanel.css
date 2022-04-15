@@ -76,6 +76,9 @@ ul#weatherDistricts > li > img.weatherIcon {
 }
 
 ul#weatherDistricts > li > span.stedNavn {
-  /* font-size: 0.8em; */
   color: #f1f1f2;
+  overflow: hidden;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
