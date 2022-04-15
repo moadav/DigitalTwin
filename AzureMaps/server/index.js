@@ -1,6 +1,6 @@
 const { DigitalTwinsClient } = require("@azure/digital-twins-core")
 const { DefaultAzureCredential } = require("@azure/identity")
-const { toArray } = require('ix/asynciterable')
+const { toArray } = require("ix/asynciterable")
 
 const express = require("express")
 const cors = require("cors")
@@ -13,25 +13,57 @@ const client = new DigitalTwinsClient(dt_link, new DefaultAzureCredential())
 app.use(express.json())
 app.use(cors())
 
-
 // GET current weather values from twin
-app.get('/weather', async (req, res) => {
+app.get("/weather", async (req, res) => {
   const weather = await getWeather()
   res.status(200).send(weather)
 })
 
+// returns weather for all bydeler/districts and the average temperature/symbol
 const getWeather = async () => {
-  const query = "SELECT * FROM digitaltwins WHERE $dtId = 'Frogner'"
+  const query =
+    "SELECT * FROM digitaltwins WHERE IS_OF_MODEL('dtmi:omrade:sted;1')"
 
-  // the whole Frogner node
-  const dtNode = (await client.queryTwins(query).next()).value
+  const dtNodes = await client.queryTwins(query)
 
-  const temperature = dtNode.weather.KlimaInfo.Air_info.Air_temperature
-  const weatherSymbol = dtNode.weather.KlimaInfo.Symbole_code
+  let districts = []
 
-  return { temperature, weatherSymbol }
+  // loop though all districts and keep temp, coordinates and symbol
+  let res = await dtNodes.next()
+  while (!res.done) {
+    const weatherSymbol = res.value.weather.KlimaInfo.Symbole_code
+    const weatherObj = {
+      name: res.value.Coordinates.StedNavn,
+      coordinates: {
+        lat: res.value.Coordinates.Lat,
+        lon: res.value.Coordinates.Lon,
+      },
+      temperature: res.value.weather.KlimaInfo.Air_info.Air_temperature,
+      weatherSymbol,
+    }
+
+    districts.push(weatherObj)
+    res = await dtNodes.next()
+  }
+
+  // calculate average temperature
+  const avgTemp = districts.reduce((t, val) => {
+    return t + val.temperature / districts.length
+  }, 0)
+
+  // find weather symbol with highest occurrence
+  let dArr = districts.slice().map((d) => d.weatherSymbol)
+  const average_symbol = dArr
+    .slice()
+    .sort(
+      (a, b) =>
+        dArr.filter((v) => v === a).length - dArr.filter((v) => v === b).length
+    )
+    .pop()
+
+  return { average_temperature: avgTemp.toFixed(1), average_symbol, districts }
 }
-
+// getWeather().then((r) => console.log(JSON.stringify(r, null, 2)))
 
 // GET list of all bike stations
 app.get('/bikestations', async (req, res) => {
@@ -48,8 +80,6 @@ async function getDigitalTwin(id) {
     let digitalTwinArray = await toArray(digitalTwinResponse);
 
     return digitalTwinArray;
-    
 }
-
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}.`))
