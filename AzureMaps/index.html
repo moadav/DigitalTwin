@@ -28,6 +28,9 @@
     <!-- Import station update functions -->
     <script type="text/javascript" src="./updateStations.js"></script>
 
+    <!-- Import station update functions -->
+    <script type="text/javascript" src="./filterStations.js"></script>
+
     <script>
       var map, datasource, layer, popup, stationsBubbleLayer
 
@@ -243,6 +246,11 @@
       <h3>Stations</h3>
       <label for="show_stations_checkbox">Show Stations</label>
       <input type="checkbox" id="show_stations_checkbox" value="1" checked="checked" onClick="updateShowStations()"/>
+      <div id="filterBikesContainer">
+        <label>Filter minimum avaliable bikes:</label>
+        <input oninput="filterMinAvailable()" type="range" id="range_available_bikes" name="available_bikes" min="0" max="10" step="1" value="0">
+        <output id="available_bikes_output" for="available_bikes">0</output>
+      </div>
 
       <p id="weather"></p>
     </div>

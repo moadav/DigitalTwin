@@ -14,15 +14,20 @@
   box-shadow: 5px 0px 8px grey;
 }
 
-/* .sidepanel span {
-  position: relative;
-  display: block;
-  width: calc(100% - 2em);
-  min-width: 100px;
-  padding: 1em;
-  background-color: #01848f;
-} */
+.sidepanel p {
+  padding: 0;
+  margin: 8px 0;
+}
 
+/* Filter */
+input#range_available_bikes {
+  width: 60%;
+}
+#filterBikesContainer > label {
+  font-size: 1.3vw;
+}
+
+/* Weather */
 .sidepanel #avgWeatherSection {
   display: flex;
   flex-direction: row;
@@ -76,6 +81,13 @@ ul#weatherDistricts > li > img.weatherIcon {
 }
 
 ul#weatherDistricts > li > span.stedNavn {
-  /* font-size: 0.8em; */
   color: #f1f1f2;
+  overflow: hidden;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+ul#weatherDistricts > li:nth-child(even) > span.stedNavn {
+  padding-left: 8px;
 }
