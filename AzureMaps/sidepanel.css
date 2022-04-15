@@ -82,3 +82,7 @@ ul#weatherDistricts > li > span.stedNavn {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+ul#weatherDistricts > li:nth-child(even) > span.stedNavn {
+  padding-left: 8px;
+}
