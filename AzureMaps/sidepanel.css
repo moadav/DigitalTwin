@@ -23,29 +23,59 @@
   background-color: #01848f;
 } */
 
-.sidepanel #weatherSection {
+.sidepanel #avgWeatherSection {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
-.sidepanel #weatherSection span {
+#avgDegrees {
   font-size: 1.8em;
 }
 
-#temperature {
+.temperature {
   position: relative;
 }
 
-#temperature > span.celcius {
-  font-size: 0.8em;
+#avgWeatherSection span.celcius {
+  font-size: 1em;
+}
+
+.temperature span.celcius {
+  font-size: 0.7em;
   vertical-align: top;
   top: -0.4em;
   position: inherit;
 }
 
-.sidepanel > #weatherSection > img {
+.sidepanel > #avgWeatherSection > img {
   max-width: 3em;
   max-height: 3em;
+}
+
+ul#weatherDistricts {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 8px 0;
+  padding: 0 8px;
+  list-style: none;
+}
+ul#weatherDistricts > li {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-end;
+  font-size: 0.9vw;
+}
+ul#weatherDistricts > li > img.weatherIcon {
+  max-width: 2em;
+  max-height: 2em;
+}
+
+ul#weatherDistricts > li > span.stedNavn {
+  /* font-size: 0.8em; */
+  color: #f1f1f2;
 }

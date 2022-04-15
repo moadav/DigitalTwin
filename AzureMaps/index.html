@@ -34,7 +34,6 @@
       var bikeStations = loadStations()
 
       async function getMap() {
-
         await updateStations(bikeStations);
 
         // The bounding box to limit the map view to. Format [West, South, East, North]
@@ -67,7 +66,6 @@
           authOptions: auth,
         }
 
-        
         // Initialize a map instance.
         map = new atlas.Map("myMap", map_options) // 'myMap' = id of div to render map
 
@@ -225,22 +223,21 @@
           popup.open(map)
         }
       }
-
     </script>
   </head>
 
-  <!-- <body onload="getMap()"> -->
   <body onload="getMap()">
+  <!-- <body> -->
     <div class="sidepanel">
       <h3>Weather</h3>
-      <section id="weatherSection">
-        <img id="weatherIcon"/>
-        <div id="temperature">
-          <span id="degrees">9</span>
+      <section id="avgWeatherSection">
+        <img id="avgWeatherIcon" class="weatherIcon" />
+        <div class="temperature">
+          <span id="avgDegrees"></span>
           <span class="celcius">&deg;C</span>
         </div>
       </section>
-
+      <ul id="weatherDistricts"></ul>
       <!-- <button onclick="updateWeather()">Test Weather API</button> -->
 
       <h3>Stations</h3>
