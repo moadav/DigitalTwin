@@ -231,14 +231,13 @@
 
 
       async function bodyOnload() {
-        //getMap();
+        getMap();
         populateAutoComplete();
       }
 
     </script>
   </head>
 
-  <!-- <body onload="getMap()"> -->
   <body onload="bodyOnload()">
 
     <div class="sidepanel">
@@ -324,15 +323,6 @@
               <option value="10">10:00</option>
               <option value="11">11:00</option>
             </select>
-
-            
-
-
-           
-            
-            
-            <!-- <input type="submit" value="Search"/> -->
-          
           </form>
 
           <div id="weather_container">
@@ -342,15 +332,9 @@
 
           <div id="form_error"></div>
         
-    
           <button id="simulation_button" onclick="testGetMLStudioResults()">Search</button>
 
-          
-  
-          <div id="simulation_result">
-
-
-          </div>
+          <div id="simulation_result"></div>
 
 
         </div> <!-- Simulation tab container end -->
