@@ -12,7 +12,7 @@
   "dependencies": {
     "@azure/digital-twins-core": "^1.0.3",
     "@azure/identity": "^2.0.4",
-    "body-parser": "^1.20.0",
+    "axios": "^0.26.1",
     "cors": "^2.8.5",
     "express": "^4.17.3",
     "ix": "^4.5.2"

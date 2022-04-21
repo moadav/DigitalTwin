@@ -25,19 +25,24 @@
     <!-- Import logic to handle weather -->
     <script type="text/javascript" src="./weatherHandler.js"></script>
 
-    <!-- Import station update functions -->
+    <!-- Javascript files -->
     <script type="text/javascript" src="./updateStations.js"></script>
+    <script type="text/javascript" src="./autocomplete.js"></script>
+    <script type="text/javascript" src="./simulation.js"></script>
 
     <!-- Import station update functions -->
     <script type="text/javascript" src="./filterStations.js"></script>
 
     <script>
-      var map, datasource, layer, popup, stationsBubbleLayer
-
+      var map, datasource, layer, popup, stationsBubbleLayer;
+  
       var bikeStations = loadStations()
+      var stationList = [];
+      
 
       async function getMap() {
         await updateStations(bikeStations);
+        
 
         // The bounding box to limit the map view to. Format [West, South, East, North]
         var boundingBox = [10.469355672761397, 59.79312074828016, 10.968043737033126, 60.14542186822472]
@@ -164,28 +169,6 @@
         })
       }
 
-      function bubbleClicked(e) {
-        // Make sure the event occurred on a shape feature.
-        if (e.shapes && e.shapes.length > 0) {
-          // Since the data is coming from a vector tile source, it will be a raw GeoJSON feature and not a Shape class.
-          var f = e.shapes[0]
-
-          // If the shape is a Point, use its coordinates to position the popup, otherwise use the mouse location.
-          var pos =
-            f.geometry.type === "Point" ? f.geometry.coordinates : e.position
-
-          // Update the content and position of the popup.
-          popup.setOptions({
-            // Apply a template to the properties of the shape feature.
-            content: atlas.PopupTemplate.applyTemplate(f.properties),
-            position: pos,
-          })
-
-          // Open the popup.
-          popup.open(map)
-        }
-      }
-
       function featureClicked(e) {
         // Make sure the event occurred on a shape feature.
         if (e.shapes && e.shapes.length > 0) {
@@ -194,10 +177,9 @@
           var offset = [0, 0]
           var properties
 
-          //console.log(e)
-
           if (e.shapes[0] instanceof atlas.Shape) {
             properties = e.shapes[0].getProperties()
+          
 
             // If the shape is a point feature, show the popup at the points coordinate.
             if (e.shapes[0].getType() === "Point") {
@@ -226,35 +208,160 @@
           popup.open(map)
         }
       }
+
+      function openTab(event, tabName) {
+        let tabs = document.getElementsByClassName("tab");
+        for (let i = 0; i < tabs.length; i++) {
+          tabs[i].style.display = "none";
+        } 
+
+        let tablinks = document.getElementsByClassName("tabLinks");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        document.getElementById(tabName).style.display = "block";
+        event.currentTarget.className += " active";
+      }
+
+      async function populateAutoComplete() {
+        stationList = await getStationList();
+        autocomplete(document.getElementById("myInput"), stationList)
+      }
+
+
+      async function bodyOnload() {
+        //getMap();
+        populateAutoComplete();
+      }
+
     </script>
   </head>
 
-  <body onload="getMap()">
-  <!-- <body> -->
+  <!-- <body onload="getMap()"> -->
+  <body onload="bodyOnload()">
+
     <div class="sidepanel">
-      <h3>Weather</h3>
-      <section id="avgWeatherSection">
+
+      <!-- Navigation Tabs -->
+      <div class="tabpanel">
+        <button class="tabLinks active" onclick="openTab(event, 'dashboardTab')">Dashboard</button>
+        <button class="tabLinks" onclick="openTab(event, 'simulationTab')">Simulation</button>
+      </div>
+
+      <!-- Dashboard Tab -->
+      <div class="tab" id="dashboardTab">
+        <h3>Weather</h3>
+        <section id="avgWeatherSection">
         <img id="avgWeatherIcon" class="weatherIcon" />
         <div class="temperature">
           <span id="avgDegrees"></span>
           <span class="celcius">&deg;C</span>
         </div>
-      </section>
-      <ul id="weatherDistricts"></ul>
-      <!-- <button onclick="updateWeather()">Test Weather API</button> -->
+        </section>
+        <ul id="weatherDistricts"></ul>
 
-      <h3>Stations</h3>
-      <label for="show_stations_checkbox">Show Stations</label>
-      <input type="checkbox" id="show_stations_checkbox" value="1" checked="checked" onClick="updateShowStations()"/>
-      <div id="filterBikesContainer">
-        <label>Filter minimum avaliable bikes:</label>
-        <input oninput="filterMinAvailable()" type="range" id="range_available_bikes" name="available_bikes" min="0" max="10" step="1" value="0">
-        <output id="available_bikes_output" for="available_bikes">0</output>
-      </div>
+        <h3>Stations</h3>
+        <label for="show_stations_checkbox">Show Stations</label>
+        <input type="checkbox" id="show_stations_checkbox" value="1" checked="checked" onClick="updateShowStations()"/>
+        <div id="filterBikesContainer">
+          <label>Filter minimum avaliable bikes:</label>
+          <input oninput="filterMinAvailable()" type="range" id="range_available_bikes" name="available_bikes" min="0" max="10" step="1" value="0">
+          <output id="available_bikes_output" for="available_bikes">0</output>
+        </div>
 
-      <p id="weather"></p>
+        <p id="weather"></p>
+
+      </div> <!-- Dashboard tab end-->
+   
+      <!-- Simulation Tab -->
+      <div class="tab" id="simulationTab" style="display:none">
+        <div id="simulation_tab_container">
+
+          <h3>Find available bikes</h3>
+
+          <form class="form" autocomplete="off">
+
+            <div class="autocomplete">
+              <input id="myInput" type="text" name="searchStation" placeholder="Station name">
+            </div>
+
+            <select name="days" id="select_day">
+              <option value="">Select day</option>
+              <option value="Monday">Monday</option>>
+              <option value="Tuesday">Tuesday</option>>
+              <option value="Wednesday">Wednesday</option>>
+              <option value="Thursday">Thursday</option>>
+              <option value="Friday">Friday</option>>
+              <option value="Saturday">Saturday</option>>
+              <option value="Sunday">Sunday</option>>
+            </select>
+
+            <select name="hours" id="select_hours">
+              <option value="">Select hour</option>
+              <option value="12">12:00</option>
+              <option value="13">13:00</option>
+              <option value="14">14:00</option>
+              <option value="15">15:00</option>
+              <option value="16">16:00</option>
+              <option value="17">17:00</option>
+              <option value="18">18:00</option>
+              <option value="19">19:00</option>
+              <option value="20">20:00</option>
+              <option value="21">21:00</option>
+              <option value="22">22:00</option>
+              <option value="23">23:00</option>
+              <option value="00">00:00</option>
+              <option value="01">01:00</option>
+              <option value="02">02:00</option>
+              <option value="03">03:00</option>
+              <option value="04">04:00</option>
+              <option value="05">05:00</option>
+              <option value="06">06:00</option>
+              <option value="07">07:00</option>
+              <option value="08">08:00</option>
+              <option value="09">09:00</option>
+              <option value="10">10:00</option>
+              <option value="11">11:00</option>
+            </select>
+
+            
+
+
+           
+            
+            
+            <!-- <input type="submit" value="Search"/> -->
+          
+          </form>
+
+          <div id="weather_container">
+          <label id="weather_temp_label" for="weather_temp">Temperature:</label>
+          <input type="number" id="weather_temp" />
+          </div>
+
+          <div id="form_error"></div>
+        
+    
+          <button id="simulation_button" onclick="testGetMLStudioResults()">Search</button>
+
+          
+  
+          <div id="simulation_result">
+
+
+          </div>
+
+
+        </div> <!-- Simulation tab container end -->
+
+      </div> <!-- Simulation tab end -->
+
     </div>
+    <!-- Sidepanel end -->
 
     <div id="myMap"></div>
+
   </body>
+
 </html>
