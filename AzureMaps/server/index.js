@@ -1,10 +1,11 @@
 const { DigitalTwinsClient } = require("@azure/digital-twins-core")
 const { DefaultAzureCredential } = require("@azure/identity")
-const { toArray } = require('ix/asynciterable')
-const axios = require('axios').default;
+const { toArray } = require("ix/asynciterable")
+const axios = require("axios").default
+const mlsEndpoint = require("../auth.js").mlStudioEndpoint
 
 const express = require("express")
-const cors = require("cors");
+const cors = require("cors")
 const app = express()
 const PORT = 8080
 
@@ -67,65 +68,66 @@ const getWeather = async () => {
 // getWeather().then((r) => console.log(JSON.stringify(r, null, 2)))
 
 // GET list of all bike stations
-app.get('/bikestations', async (req, res) => {
+app.get("/bikestations", async (req, res) => {
+  let bikeStations = await getDigitalTwin(
+    "SELECT * FROM digitaltwins WHERE IS_OF_MODEL('dtmi:oslo:sykkler:sykkel;1')"
+  )
 
-    let bikeStations = await getDigitalTwin("SELECT * FROM digitaltwins WHERE IS_OF_MODEL('dtmi:oslo:sykkler:sykkel;1')");
-    
-    let bikeStationsArray = [...bikeStations[0].value, ...bikeStations[1].value, ...bikeStations[2].value]
+  let bikeStationsArray = [
+    ...bikeStations[0].value,
+    ...bikeStations[1].value,
+    ...bikeStations[2].value,
+  ]
 
-    res.status(200).send(bikeStationsArray);
+  res.status(200).send(bikeStationsArray)
 })
 
 async function getDigitalTwin(id) {
-    let digitalTwinResponse = client.queryTwins(id).byPage();
-    let digitalTwinArray = await toArray(digitalTwinResponse);
+  let digitalTwinResponse = client.queryTwins(id).byPage()
+  let digitalTwinArray = await toArray(digitalTwinResponse)
 
-    return digitalTwinArray;
+  return digitalTwinArray
 }
 
 // GET Azure ML Studio results
-app.post('/mlstudio', (req, res) => {
-
-  let stationId = req.body.stationId;
-  let day = req.body.day;
-  let time = req.body.time + ':00:00';
-  let temperature = req.body.temperature;
+app.post("/mlstudio", (req, res) => {
+  let stationId = req.body.stationId
+  let day = req.body.day
+  let time = req.body.time + ":00:00"
+  let temperature = req.body.temperature
 
   let data = {
-    "Inputs": {
-        "WebServiceInput0": [
-          {
-            "station_id": stationId,
-            "time": day,
-            "air_temperature": temperature,
-            "time_of_day": time
-          }
-        ]
-      },
-      "GlobalParameters": {}
-  };
+    Inputs: {
+      WebServiceInput0: [
+        {
+          station_id: stationId,
+          time: day,
+          air_temperature: temperature,
+          time_of_day: time,
+        },
+      ],
+    },
+    GlobalParameters: {},
+  }
 
-  let jsonData = JSON.stringify(data);
-
-  const url = 'http://6547b2ed-59b8-4910-8a21-5dc030d5ee9f.westeurope.azurecontainer.io/score';
+  let jsonData = JSON.stringify(data)
 
   const options = {
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer rFCxahfD7rSZjdGRzCNnJc0najIHi81v'
-    }
+      "Content-Type": "application/json",
+      Authorization: mlsEndpoint.authentication,
+    },
   }
 
-  axios.post(url, jsonData, options)
-    .then(response => {
-      res.status(200).send(response.data);
+  axios
+    .post(mlsEndpoint.apiEndpoint, jsonData, options)
+    .then((response) => {
+      res.status(200).send(response.data)
       //console.log(response.data.WebServiceInput0[0]);
     })
-    .catch(error => {
-      console.log(error);
-  });
-
-
-});
+    .catch((error) => {
+      console.log(error)
+    })
+})
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}.`))
