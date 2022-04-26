@@ -36,9 +36,8 @@ After installing the extension in VS Code, confirm it's installed after seeing a
 
 ## Azure CLI
 
-To authenticate connecting to the Azure Service, you need Azure CLI. If you don't already have it installed, follow [these instructions](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
-
-If you already have this installed go to [Azure authentication](#azure-authentication).
+To authenticate connecting to the Azure Service, you need Azure CLI. If you already have this installed go to [Azure authentication](#azure-authentication).  
+If you don't already have it installed, follow [these instructions](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
 
 To confirm Azure CLI is installed, you can run:
 
@@ -71,8 +70,6 @@ This will open up a webbrowser where you login to Azure. After successfully logg
 
 ## Downloading the project
 
----
-
 If you have Git bash installed, open up git bash and run:
 
 ```
@@ -86,8 +83,6 @@ If you dont have Git bash or other git cloning program:
 - Extract the zipped folder to your desired location.
 
 ## Setup & config
-
----
 
 - Open up the cloned/downloaded project in VS Code (or any editor of your choice).
   - File > Open Folder
@@ -115,12 +110,12 @@ Now all necessary authentication to Azure is set up, next you will intall the no
 npm install
 ```
 
-After installation is done, make sure you now have a `node_modules` folder inside the server folder.
+After installation is done, make sure you now have a `node_modules` folder inside the server folder.  
 ![2022-04-26](https://user-images.githubusercontent.com/4765250/165314712-2b46c92a-3b20-4a0c-976f-7b032bff0801.png)
 
 ## Running the project
 
-The setup and installation for your system is now complete. You can now run the server, and
+The setup and installation for your system is now complete. You will now run the API endpoint server, and then _Live Server_ as the client. Keep in mind the API endpoint server needs to run in the background when you are using the client.
 
 ### Starting API endpoint server
 
