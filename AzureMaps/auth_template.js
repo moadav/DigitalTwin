@@ -1,10 +1,14 @@
+/**
+ * This is a template for authenticating server towards ML Studio & Azure Maps key
+ * It's important the filename is 'auth.js' so duplicate this file and rename it.
+ */
+
 /* Azure maps resource
-  - Copy code to 'auth.js'
   - Use 'Primary Key' from your Azure Map resource.
 */
 const auth = {
   authType: "subscriptionKey",
-  subscriptionKey: "",
+  subscriptionKey: "<key>",
 }
 
 /* ML Studio endpoint
