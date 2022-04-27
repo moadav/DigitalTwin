@@ -93,7 +93,7 @@ This file has an object called `auth`, which is for the **Azure Maps** resource.
 
 ### API endpoint installation
 
-Now all necessary authentication to Azure is set up, next you will intall the node packages for the local API endpoint.
+Now all necessary authentication to Azure is set up, next you will install the node packages for the local API endpoint.
 
 1. Open the project up in a terminal, and change working directory to the _server_ folder `DigitalTwin\AzureMaps\server`.
    - if you are currently in `DigitalTwin`, run: **cd AzureMaps/server**
