@@ -22,18 +22,6 @@ You should now see Node version `v16.13.2` (or higher) and npm version `8.5.5` (
 
 - Troubleshooting Node / npm [here](#node--npm)
 
-## Visual Studio Code
-
-Download VS Code [here](https://code.visualstudio.com/download).  
-In order to run Azure Maps, you need to run it on a server, therefore the quickest and easiest way is the Live Server Extension for VS Code.
-
-- Download **Live Server** extension [here](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer).
-
-After installing the extension in VS Code, confirm it's installed after seeing a **Go Live** button in the bottom right corner.
-![go-live-live-server](https://user-images.githubusercontent.com/4765250/165154093-ab931bcb-cdca-45e2-b61a-771b230145f1.JPG)
-
-- If you don't have this button: Troubleshooting VS Code Live Server [here](#node--npm)
-
 ## Azure CLI
 
 To authenticate connecting to the Azure Service, you need Azure CLI. If you already have this installed go to [Azure authentication](#azure-authentication).  
@@ -120,7 +108,7 @@ After installation is done, make sure you now have a `node_modules` folder insid
 
 ## Running the project
 
-The setup and installation for your system is now complete. You will now run the API endpoint server, and then _Live Server_ as the client. Keep in mind the API endpoint server needs to run in the background when you are using the client.
+The setup and installation for your system is now complete. You will now run the API endpoint server, and then open [index.html](index.html) in your browser. Keep in mind the API endpoint server needs to run in the background when you are using the client.
 
 ### Starting API endpoint server
 
@@ -138,13 +126,11 @@ Server started on port 8080.
 
 Troubleshooting starting the API server [here](#node-server--api-endpoint)
 
-### Running client with Live Server
+### Running client in your browser
 
-- In VS Code, open up the project and go to **index.html** located: `DigitalTwin\AzureMaps\index.html`.
-- While **index.html** is selected in VS Code, click **Go Live** in the bottom right corner.
-  ![image](https://user-images.githubusercontent.com/4765250/165324087-9f480558-5371-44e8-a335-09755657f2ec.png)
+All you need to do now is open up `index.html` in your browser, located in `DigitalTwin/AzureMaps/index.html`.
 
-A web browser should now open with the project running. If you see this you have set up everything correctly.  
+If you see this you have set up everything correctly.  
 ![image](https://user-images.githubusercontent.com/4765250/165337381-0eae4d4f-338e-4b25-ac0d-6143e5025065.png)
 
 If you don't see this, troubleshooting [here](#indexhtml)
@@ -169,17 +155,6 @@ Npm is running wrong version, force version `8.5.5` with:
 npm install npm@8.5.5 -g
 ```
 
-## VS Code Live Server
-
-Visual Stuio Marketplace is not opening up VS Code extension page, or redirecting correctly:
-
-- Navigate to _View > Extensions_ **or** open extensions with _Ctrl+Shift+X_.
-- Search `Live Server` in the search field. Click on _Live Server_ by _Ritwick Dey_.  
-  ![image](https://user-images.githubusercontent.com/4765250/165156520-d15b94f7-aa73-4a6f-a99f-39d60d9c567d.png)
-- Click install
-- If prompted to reload, click 'Reload'.
-- You should now see a 'Go Live' button in bottom right corner.
-
 ## Running the project
 
 ### Node server / API endpoint
@@ -190,22 +165,10 @@ Visual Stuio Marketplace is not opening up VS Code extension page, or redirectin
 
 ### index.html
 
-When clicking **Go Live** I see a directory in the browser like so:  
-![image](https://user-images.githubusercontent.com/4765250/165320969-92968366-eff5-4eeb-80cf-56c22467ec09.png)
-
-- Click the button again to stop the **Live Server**  
-  ![image](https://user-images.githubusercontent.com/4765250/165321506-2476a490-94fb-401b-9c00-c98e60c8b273.png)
-- Open up index.html again located: `DigitalTwin\AzureMaps\index.html`, and make sure this file is in focus when you click **Go Live** again.
-
-The web browser is not opening automaticly when clicking **Go Live**
-
-- If _Live Server_ is running, the 'Go Live' button should now say **Port: &lt;number&gt;**
-- Manually open the running client in your browser after replacing the port number `http://localhost:<port>/AzureMaps/index.html`
-
 The website is missing temperatures, and looks like this:  
 ![image](https://user-images.githubusercontent.com/4765250/165340174-b2a35995-2d59-45ad-ba03-692ad800d1ad.png)
 
-- This means the Node server / API endpoint is not running, or set up correctly.
+- This means the Node server / API endpoint is either not running, haven't loaded yet, or not set up correctly.
 - Open http://localhost:8080/weather
-  - if you see JSON data, restart the Live Server on index.html
-  - if you see `ERR_CONNECTION_REFUSED`, go to [starting API endpoint server](#starting-api-endpoint-server)
+  - if you see JSON data, refresh the web page `index.html`
+  - if you see `ERR_CONNECTION_REFUSED`, the server is not running. Go to [starting API endpoint server](#starting-api-endpoint-server)
