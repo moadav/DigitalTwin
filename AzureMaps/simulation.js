@@ -3,13 +3,13 @@ async function testGetMLStudioResults() {
 
   let resultsDiv = document.getElementById("simulation_result")
 
-  stationName = document.getElementById("myInput").value
+  stationName = document.getElementById("myInput").value.trim()
   day = document.getElementById("select_day").value
   time = document.getElementById("select_hours").value
   temperature = document.getElementById("weather_temp").value
 
-  let stationId = getStationId(stationName)
-  let validated = formValidation(stationName, day, time, temperature)
+  const validated = formValidation(stationName, day, time, temperature)
+  const stationId = getStationId(stationName)
 
   if (validated) {
     let body = {
@@ -47,25 +47,27 @@ async function testGetMLStudioResults() {
 
 function formValidation(stationName, day, time, temperature) {
   let errorDiv = document.getElementById("form_error")
-  let errorMessage = ""
 
-  if (stationName && day && time && temperature) {
-    errorDiv.innerHTML = errorMessage
-    return true
+  if (!stationName || !day || !time || !temperature) {
+    errorDiv.innerHTML = "Please fill out all fields."
+    return false
+  }
+  if (!getStationId(stationName)) {
+    errorDiv.innerHTML =
+      "Could not find station, make sure it's typed correctly!"
+    return false
   }
 
-  errorMessage = "Please fill out all fields."
-  errorDiv.innerHTML = errorMessage
-  return false
+  errorDiv.innerHTML = ""
+  return true
 }
 
 function getStationId(stationName) {
-  let id
+  let id = null
 
   bikeStations.features.forEach((station) => {
     if (stationName === station.properties.name) {
       id = station.properties.station_id
-      return id
     }
   })
 
