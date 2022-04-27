@@ -73,13 +73,9 @@ app.get("/bikestations", async (req, res) => {
     "SELECT * FROM digitaltwins WHERE IS_OF_MODEL('dtmi:oslo:sykkler:sykkel;1')"
   )
 
-  let bikeStationsArray = [
-    ...bikeStations[0].value,
-    ...bikeStations[1].value,
-    ...bikeStations[2].value,
-  ]
+  // let bikeStationsArray = [...bikeStations[0].value, ...bikeStations[1].value, ...bikeStations[2].value]
 
-  res.status(200).send(bikeStationsArray)
+  res.status(200).send(bikeStations[0].value)
 })
 
 async function getDigitalTwin(id) {
