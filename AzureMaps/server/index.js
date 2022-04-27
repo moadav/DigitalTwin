@@ -92,6 +92,12 @@ app.post("/mlstudio", (req, res) => {
   let time = req.body.time + ":00:00"
   let temperature = req.body.temperature
 
+  // make sure all fields exist
+  if (!stationId || !day || !time || !temperature) {
+    console.error("Missing input variables for ML studio")
+    return
+  }
+
   let data = {
     Inputs: {
       WebServiceInput0: [
@@ -106,8 +112,6 @@ app.post("/mlstudio", (req, res) => {
     GlobalParameters: {},
   }
 
-  let jsonData = JSON.stringify(data)
-
   const options = {
     headers: {
       "Content-Type": "application/json",
@@ -116,7 +120,7 @@ app.post("/mlstudio", (req, res) => {
   }
 
   axios
-    .post(mlsEndpoint.apiEndpoint, jsonData, options)
+    .post(mlsEndpoint.apiEndpoint, data, options)
     .then((response) => {
       res.status(200).send(response.data)
       //console.log(response.data.WebServiceInput0[0]);
