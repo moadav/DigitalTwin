@@ -2,7 +2,7 @@ const { DigitalTwinsClient } = require("@azure/digital-twins-core")
 const { DefaultAzureCredential } = require("@azure/identity")
 const { toArray } = require("ix/asynciterable")
 const axios = require("axios").default
-const mlsEndpoint = require("../auth.js").mlStudioEndpoint
+const mlsEndpoint = require("./mlauth.js").mlStudioEndpoint
 
 const express = require("express")
 const cors = require("cors")

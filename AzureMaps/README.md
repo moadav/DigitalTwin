@@ -84,19 +84,24 @@ If you dont have Git bash or other git cloning program:
 
 ## Setup & config
 
-- Open up the cloned/downloaded project in VS Code (or any editor of your choice).
-  - File > Open Folder
+### Authenticating Azure Maps
+
+- Open up the cloned/downloaded project in any editor of your choice.
 - Navigate to [`DigitalTwin/AzureMaps/auth_template.js`](auth_template.js) and rename this file(or make a new file) to `auth.js`.
 - Make sure `auth.js` is in the same folder: `DigitalTwin/AzureMaps/auth.js`.
 
-This file has two objects: `auth` and `mlStudioEndpoint`:  
-![image](https://user-images.githubusercontent.com/4765250/165169307-55199aeb-88e5-4515-a526-e74016cb4bac.png)
+This file has an object called `auth`, which is for the **Azure Maps** resource.  
+![image](https://user-images.githubusercontent.com/4765250/165597885-0c6521ac-160c-4a1e-b177-a6504362696e.png)
 
-`auth` is for **Azure Maps** resource, and `mlStudioEndpoint` is for the _available-bikes-endpoint_ in **ML Studio**.
+- Replace `<token>` with the subscription key from the **Azure Maps** resource _dthiofmaps_ > _Authentication_ > **Primary Key**.
 
-- In `auth` you need to type the subscription key from the **Azure Maps** resource _dthiofmaps_ > _Authentication_ > **Primary Key**.
-- In `mlStudioEndpoint` you need to replace `<api endpoint url>` with the _REST endpoint_ from _Hiof-ML-Studio_ > _Endpoints_ > **available-bikes-endpoint** > _Consume_.
-- Then replace `<token>` with **Primary Key** under _Authentication_ for the same endpoint. Make sure you leave 'Bearer' as is, in front of the primary key.
+### Authenticating ML Studio
+
+- Navigate to [`DigitalTwin/AzureMaps/server/mlauth_template.js`](server/mlauth_template.js) and rename this file(or make a new file) to `mlauth.js`. The object `mlStudioEndpoint` is for the _available-bikes-endpoint_ in **ML Studio**.
+  ![image](https://user-images.githubusercontent.com/4765250/165611904-c54972f1-825e-40f7-8b5f-80363311c1e6.png)
+
+- Go to the _REST endpoint_ from _Hiof-ML-Studio_ > _Endpoints_ > **available-bikes-endpoint** > _Consume_.
+- Then replace `<token>` with **Primary Key** under _Authentication_ for this endpoint. Make sure you leave 'Bearer' as is, in front of the primary key.
 
 ### API endpoint installation
 
