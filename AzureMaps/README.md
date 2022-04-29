@@ -85,7 +85,7 @@ This file has an object called `auth`, which is for the **Azure Maps** resource.
 
 ### Authenticating ML Studio
 
-- Navigate to [`DigitalTwin/AzureMaps/server/mlauth_template.js`](server/mlauth_template.js) and rename this file(or make a new file) to `mlauth.js`. The object `mlStudioEndpoint` is for the _available-bikes-endpoint_ in **ML Studio**.
+- Navigate to [`DigitalTwin/AzureMaps/server/mlauth_template.js`](server/mlauth_template.js) and rename this file(or make a new file) to `mlauth.js`. The object `mlStudioEndpoint` is for the _available-bikes-endpoint_ in **ML Studio**.  
   ![image](https://user-images.githubusercontent.com/4765250/165611904-c54972f1-825e-40f7-8b5f-80363311c1e6.png)
 
 - Go to the _REST endpoint_ from _Hiof-ML-Studio_ > _Endpoints_ > **available-bikes-endpoint** > _Consume_.
@@ -112,7 +112,8 @@ The setup and installation for your system is now complete. You will now run the
 
 ### Starting API endpoint server
 
-In order to run the project, first run the server with Nodejs. Open up a terminal and navigate to `DigitalTwin\AzureMaps\server` (same as [the one above](#api-endpoint-installation)), and run:
+In order to run the project, first run the server with Nodejs. 
+ - Open up a terminal and navigate to `DigitalTwin\AzureMaps\server` (same as [the one above](#api-endpoint-installation)), and run:
 
 ```
 node index.js
