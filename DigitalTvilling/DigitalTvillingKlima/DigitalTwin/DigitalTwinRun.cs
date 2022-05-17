@@ -31,9 +31,6 @@ namespace DigitalTvillingKlima.DigitalTwin
             Koordinaterverdi();
             Api.InitalizeKlimaApi();
 
-            //skaper error
-            //JsonToModel.InitializeModels(Client);
-
             CreateTwinsAsync();
             Console.WriteLine("completed");
 

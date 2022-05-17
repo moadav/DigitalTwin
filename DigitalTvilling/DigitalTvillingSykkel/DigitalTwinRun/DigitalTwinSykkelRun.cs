@@ -35,6 +35,7 @@ namespace DigitalTvillingSykkel.DigitalTwinRun
         public void RunSykkel()
         {
             ApiSykkel.InitalizeSykkelApi();
+            //CreateNeededTwinAndRelationshipAsync();
             ApiResponseAsync();
             
         }

@@ -8,8 +8,8 @@ using System.Text;
 namespace DigitalTvillingSykkel.DigitalTwin
 {
     public class SykkelTwin
-    {
-        readonly string sykkel_tilgjengelighet_modelId = "dtmi:oslo:sykkler:sykkel;1";
+    {  
+        readonly string sykkel_tilgjengelighet_modelId = "dtmi:oslo:sykler:stasjoner;1";
         readonly string sykkel_status_property_name = "Station_Status";
         readonly string sykkel_tilgjengelighet_property_name = "Station_information";
         readonly string sykkel_tilgjengelighet_component_name = "Bicycle_Status";
