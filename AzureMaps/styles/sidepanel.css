@@ -196,6 +196,12 @@ input[type=submit] {
   width: 70%;
   align-self: center;
 }
+#simulation_button:active {
+  box-shadow: inset 0 0.6em 2em -0.3em rgb(0 0 0 / 15%), inset 0 0 0em 0.05em rgb(255 255 255 / 12%);
+}
+button#simulation_button:hover {
+  cursor: pointer;
+}
 
 #form_error {
   margin-top: 10px;
