@@ -4,6 +4,8 @@ using System.Text;
 
 namespace DigitalTvillingKlima.testfolder
 {
+
+    /// <summary> Primary Class that helps deconstructing the DTDL - model with corresponding values in the DTDL - model</summary>
     public class KlimaInfo
     {
 

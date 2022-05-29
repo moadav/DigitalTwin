@@ -7,24 +7,39 @@ using System.Threading.Tasks;
 
 namespace DigitalTvillingKlima.Hjelpeklasser
 {
+
+    /// <summary>Class that helps with building the relationship</summary>
     public static class Relationshipbuilder
     {
-        public async static Task UpdateRelationshipAsync(DigitalTwinsClient client, string digitalTwinSrcId, string digitalTwinTargetId, string nameId)
+
+
+        /// <summary>Updates the relationship asynchronous.</summary>
+        /// <param name="Client">The client.</param>
+        /// <param name="DigitalTwinSrcId">The digital twin source identifier.</param>
+        /// <param name="DigitalTwinTargetId">The digital twin target identifier.</param>
+        /// <param name="NameId">The name identifier.</param>
+        public async static Task UpdateRelationshipAsync(DigitalTwinsClient Client, string DigitalTwinSrcId, string DigitalTwinTargetId, string NameId)
         {
-            string relId = $"{digitalTwinSrcId}-{nameId}-{digitalTwinTargetId}";
+
+            ///<summary>The relationship Id created for the relationship </summary>
+            string relId = $"{DigitalTwinSrcId}-{NameId}-{DigitalTwinTargetId}";
          
             try
             {
                 var updateRelationship = new JsonPatchDocument();
 
-                await client.UpdateRelationshipAsync(digitalTwinSrcId, relId, updateRelationship);
+                /// <summary>Updates the relationship</summary>
+                /// <param name="DigitalTwinSrcId"> The id of the source twin</param>
+                /// <param name="relId"> The id of the relationship</param>
+                /// <param name="updateRelationship"> The JSONPatchDocument which updates the content on the DTDL - Modell attribute (The DTDL - model relationship is empty )</param>
+                await Client.UpdateRelationshipAsync(DigitalTwinSrcId, relId, updateRelationship);
                 
                 Console.WriteLine("Updated relationship successfully");
             }
             catch (RequestFailedException e)
             {
                 if (e.Status == 404)
-                    CreateNewRelationship(client, digitalTwinSrcId, relId, digitalTwinTargetId, nameId);
+                    CreateNewRelationship(Client, DigitalTwinSrcId, relId, DigitalTwinTargetId, NameId);
                 else
                     Console.WriteLine($"Update relationship error: {e.Status}: {e.Message}");
             }
@@ -34,11 +49,23 @@ namespace DigitalTvillingKlima.Hjelpeklasser
             }
         }
 
-        private static async void CreateNewRelationship(DigitalTwinsClient client, string digitalTwinSrcId, string relId, string digitalTwinTargetId, string nameId)
+
+        /// <summary>Creates a new relationship.</summary>
+        /// <param name="Client">The client.</param>
+        /// <param name="DigitalTwinSrcId">The digital twin source identifier.</param>
+        /// <param name="RelId">The rel identifier.</param>
+        /// <param name="DigitalTwinTargetId">The digital twin target identifier.</param>
+        /// <param name="NameId">The name identifier.</param>
+        private static async void CreateNewRelationship(DigitalTwinsClient Client, string DigitalTwinSrcId, string RelId, string DigitalTwinTargetId, string NameId)
         {
             try
             {
-                await client.CreateOrReplaceRelationshipAsync(digitalTwinSrcId, relId, BasicRelationshipCreator(digitalTwinTargetId, nameId));
+                /// <summary>creates or replaces the relationship</summary>
+                /// <param name="DigitalTwinSrcId"> The id of the source twin</param>
+                /// <param name="RelId"> The id of the relationship</param>
+                /// <param name="DigitalTwinTargetId"> The id of the target twin</param>
+                /// <param name="NameId"> The "name" attribute of the relationship found on the DTDL - model </param>
+                await Client.CreateOrReplaceRelationshipAsync(DigitalTwinSrcId, RelId, BasicRelationshipCreator(DigitalTwinTargetId, NameId));
                 Console.WriteLine("Created relationship successfully");
             }
             catch (RequestFailedException e)
@@ -51,6 +78,7 @@ namespace DigitalTvillingKlima.Hjelpeklasser
                 Console.WriteLine("Value is null " + k);
             }
         }
+
         private static async void DeleteRelationship(DigitalTwinsClient client, string relId, string twinId)
         {
             try

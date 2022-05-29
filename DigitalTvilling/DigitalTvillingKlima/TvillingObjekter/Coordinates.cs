@@ -4,6 +4,7 @@ using System.Text;
 
 namespace DigitalTvillingKlima.testfolder
 {
+    /// <summary>Class that helps deconstructing the DTDL - model with corresponding values in the DTDL - model</summary>
     public class Coordinates
     {
         public double Lat { get; set; }

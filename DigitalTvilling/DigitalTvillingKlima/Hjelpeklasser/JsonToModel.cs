@@ -5,17 +5,22 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
+/// <summary>Class that handles the creation of DTDL - models and sends them to Azure Digital Twins plattform</summary>
 public static class JsonToModel
 {
 
-    private static async void CreateModelAsync(DigitalTwinsClient digitalTwinsClient, String fileUrl)
+    /// <summary>Creates the model asynchronous.</summary>
+    /// <param name="DigitalTwinsClient">The digital twins client.</param>
+    /// <param name="FileUrl">The file URL of the DTDL - Model file.</param>
+    private static async void CreateModelAsync(DigitalTwinsClient DigitalTwinsClient, String FileUrl)
     {
-
-        List<string> models = ReturnModel(fileUrl);
+        ///<summary>gets the DTDL-model files as a List <see cref="List{T}"/></summary>
+        List<string> Models = ReturnModel(FileUrl);
 
         try
         {
-            await digitalTwinsClient.CreateModelsAsync(models);
+            ///<summary>Creates and sends the models to the Azure Digital Twin plattform</summary>
+            await DigitalTwinsClient.CreateModelsAsync(Models);
         }
         catch (RequestFailedException e)
         {
@@ -24,17 +29,22 @@ public static class JsonToModel
     }
 
 
-    public static void InitializeModels(DigitalTwinsClient digitalTwinsClient)
+    /// <summary>Gets the filepath and creates the models.</summary>
+    /// <param name="DigitalTwinsClient">The DigitalTwinsClient.</param>
+    public static void InitializeModels(DigitalTwinsClient DigitalTwinsClient)
     {
         try
         {
+
+            ///<summary>The filepath to the folder containting the DTDL - models</summary>
             DirectoryInfo modeldirectory = new DirectoryInfo(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Modeler"));
             FileInfo[] Files = modeldirectory.GetFiles("*.json");
-            foreach (FileInfo file in Files)
-            {
-                JsonToModel.CreateModelAsync(digitalTwinsClient, file.FullName);
 
-            }
+            ///<summary>Gets each file and creates a Model <see cref="CreateModelAsync(DigitalTwinsClient, string)"/></summary>
+            foreach (FileInfo file in Files)
+               CreateModelAsync(DigitalTwinsClient, file.FullName);
+
+            
         }
         catch (Exception e)
         {
@@ -42,6 +52,11 @@ public static class JsonToModel
         }
     }
 
+    /// <summary>Returns the file as a list of string</summary>
+    /// <param name="fileUrl">The file URL.</param>
+    /// <returns>
+    ///   <para>The DTDL - modell as a list of string</para>
+    /// </returns>
     private static List<string> ReturnModel(String fileUrl)
     {
         try

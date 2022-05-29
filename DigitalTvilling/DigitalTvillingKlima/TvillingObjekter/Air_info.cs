@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DigitalTvillingKlima.testfolder
 {
-    
+    /// <summary>Class that helps deconstructing the DTDL - model with corresponding values in the DTDL - model <see cref="KlimaInfo"/></summary>
     public class Air_info
     {
         

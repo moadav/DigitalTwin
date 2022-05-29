@@ -10,28 +10,66 @@ using System.Net.Http;
 
 namespace DigitalTvillingKlima.DigitalTwin
 {
+
+    /// <summary>Class that runs the digital twin logic</summary>
     public class DigitalTwinRun
     {
 
+        /// <summary>A list of coordinates to the Oslo districts</summary>
         private List<Coordinates> Koordinater = new List<Coordinates>();
-        DigitalTwinsClient Client = DigitalTwinsInstansiateClient.DigitalTwinsClient(new Uri(Api.azureUrl));
-        
+
+        /// <summary>The DigitalTwinsClient which connects to the Azure Digital Twin plattform</summary>
+        DigitalTwinsClient Client = DigitalTwinsInstansiateClient.DigitalTwinsClient();
+
+        /// <summary>Gets or sets the weathersymbol.</summary>
+        /// <value>The weathersymbol.</value>
         private string Weathersymbol { get; set; }
+
+        /// <summary>Gets or sets the time.</summary>
+        /// <value>The time.</value>
         private string Time { get; set; }
+
+        /// <summary>Gets or sets the air pressure.</summary>
+        /// <value>The air pressure.</value>
         private double Air_pressure { get; set; }
+
+        /// <summary>Gets or sets the air temporary.</summary>
+        /// <value>The air temporary.</value>
         private double Air_temp { get; set; }
+
+        /// <summary>Gets or sets the cloud frac.</summary>
+        /// <value>The cloud frac.</value>
         private double Cloud_frac { get; set; }
+
+
+        /// <summary>Gets or sets the relative hum.</summary>
+        /// <value>The relative hum.</value>
         private double Relative_hum { get; set; }
+
+
+        /// <summary>Gets or sets the wind dir.</summary>
+        /// <value>The wind dir.</value>
         private double Wind_dir { get; set; }
+
+
+        /// <summary>Gets or sets the wind speed.</summary>
+        /// <value>The wind speed.</value>
         private double Wind_speed { get; set; }
+
+
+        /// <summary>Gets or sets the precipitation amount.</summary>
+        /// <value>The precipitation amount.</value>
         private double Precipitation_amount { get; set; }
+
+
+        /// <summary>Runs the logic of creating the Digital Twins for the weather</summary>
         public void Run()
         {
 
             Koordinaterverdi();
             Api.InitalizeKlimaApi();
 
-            CreateTwinsAsync();
+            GetApiValues();
             Console.WriteLine("completed");
 
 
@@ -41,6 +79,7 @@ namespace DigitalTvillingKlima.DigitalTwin
         }
 
 
+        /// <summary>Adds the oslo districts to a list</summary>
         private void Koordinaterverdi()
         {
             Koordinater.Clear();
@@ -76,7 +115,9 @@ namespace DigitalTvillingKlima.DigitalTwin
             Koordinater.Add(new Coordinates(59.9068, 10.7623, "Gamle-Oslo"));
         }
 
-        private async void CreateTwinsAsync()
+
+        /// <summary>Takes the oslo districts coordinates and gets the api information</summary>
+        private async void GetApiValues()
         {
             for (int i = 0; i < Koordinater.Count; i++)
             {
@@ -108,6 +149,9 @@ namespace DigitalTvillingKlima.DigitalTwin
             }
         }
 
+        /// <summary>Reads the response from API asynchronous.</summary>
+        /// <param name="response">The response. <see cref="HttpResponseMessage"/></param>
+        /// <param name="loop">An integer value representing the current number of the array</param>
         private async void ReadResponseAsync(HttpResponseMessage response, int loop)
         {
             var content = await response.Content.ReadAsStringAsync();
@@ -118,6 +162,8 @@ namespace DigitalTvillingKlima.DigitalTwin
             CreateTwin(loop);
         }
 
+        /// <summary>Creates the twin.</summary>
+        /// <param name="loop">An integer value representing the current number of the array</param>
         private void CreateTwin(int loop)
         {
             KlimaInfo klimaInfo = new KlimaInfo(Weathersymbol, Time, new Air_info(Air_pressure, Air_temp, Cloud_frac, Precipitation_amount)
@@ -127,27 +173,12 @@ namespace DigitalTvillingKlima.DigitalTwin
 
 
             CreateTwinToAzureAsync(klimaInfo, coordinates);
-
-
-
-        }
-
-        private async void CreateTwinToAzureAsync(KlimaInfo klimaInfo, Coordinates coordinates)
-        {
-
-            DigitalTwinsOmrade twins = new DigitalTwinsOmrade();
-
-            BasicDigitalTwin contents = twins.CreateOmradeTwinContents(klimaInfo, coordinates.StedNavn, coordinates);
-
-            twins.CreateTwinsAsync(Client, contents);
-
-            string osloTwinId = "Oslo";
-            string relId = "Oslo_har_bydel";
-
-            await Relationshipbuilder.UpdateRelationshipAsync(Client, contents.Id, osloTwinId, relId);
         }
 
 
+        /// <summary>Gives the values.</summary>
+        /// <param name="getWeather">Feature class which comes from the response from API <see cref="Feature"/></param>
+        /// <param name="index">An integer value to skip first array value to return the real-time data</param>
         private void GiveValues(Feature getWeather, int index)
         {
             String time = Weathersymbol = getWeather.Properties.TimeSeries[index].Time;
@@ -166,7 +197,28 @@ namespace DigitalTvillingKlima.DigitalTwin
             Wind_speed = getWeather.Properties.TimeSeries[index].Data.Instant.Details.Wind_speed;
             Precipitation_amount = getWeather.Properties.TimeSeries[index - 1].Data.Next_1_hours.Details.Precipitation_amount;
 
-              
+
         }
+
+        /// <summary>Creates the twin to azure asynchronous.</summary>
+        /// <param name="klimaInfo">The KlimaInfo class <see cref="KlimaInfo"/></param>
+        /// <param name="coordinates">The Coordinates class <see cref="Coordinates"/></param>
+        private async void CreateTwinToAzureAsync(KlimaInfo klimaInfo, Coordinates coordinates)
+        {
+
+            DigitalTwinsOmrade twins = new DigitalTwinsOmrade();
+
+            BasicDigitalTwin contents = twins.CreateOmradeTwinContents(klimaInfo, coordinates.StedNavn, coordinates);
+
+            twins.CreateTwinAsync(Client, contents);
+
+            string osloTwinId = "Oslo";
+            string relId = "Oslo_har_bydel";
+
+            await Relationshipbuilder.UpdateRelationshipAsync(Client, contents.Id, osloTwinId, relId);
+        }
+
+
+       
     }
 }

@@ -70,7 +70,7 @@ namespace DigitalTvillingSykkel.DigitalTwin
             }
         }
 
-        private async void UpdateKlimaTwinsAsync(DigitalTwinsClient client, BasicDigitalTwin basicDigitalTwin)
+        private async void UpdateSykkelTwinsAsync(DigitalTwinsClient client, BasicDigitalTwin basicDigitalTwin)
         {
             try
             {
@@ -99,8 +99,7 @@ namespace DigitalTvillingSykkel.DigitalTwin
 
         public void CreateTwinsAsync(DigitalTwinsClient client, BasicDigitalTwin basicDigitalTwin)
         {
-
-            UpdateKlimaTwinsAsync(client, basicDigitalTwin);
+            UpdateSykkelTwinsAsync(client, basicDigitalTwin);
 
         }
 

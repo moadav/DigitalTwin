@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace DigitalTvillingKlima
 {
+
     public class Feature
     {
         public string Id { get; set; }
