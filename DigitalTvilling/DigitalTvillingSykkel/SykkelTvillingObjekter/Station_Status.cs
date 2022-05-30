@@ -4,6 +4,8 @@ using System.Text;
 
 namespace DigitalTvillingSykkel.SykkelTvillingObjekter
 {
+
+    /// <summary> Primary Class that helps deconstructing the DTDL - model with corresponding values in the DTDL - model</summary>
     public class Station_Status
     {
         public Bicycle_Available Bicycle_Available { get; set; }

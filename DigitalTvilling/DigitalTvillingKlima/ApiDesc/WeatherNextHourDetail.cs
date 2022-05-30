@@ -4,9 +4,7 @@ using System.Text;
 
 namespace DigitalTvillingKlima
 {
-    /// <summary>
-    ///   class to deconstruct the api 
-    /// </summary>
+    /// <summary>Class used to dekonstruct the API</summary>
     public class WeatherNextHourDetail
     {
         public double Precipitation_amount { get; set; }

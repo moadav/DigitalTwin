@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace DigitalTvillingKlima
 {
-    /// <summary>
-    ///   class to deconstruct the api 
-    /// </summary>
+    /// <summary>Class used to dekonstruct the API</summary>
     public class WeatherUnits
     {
 

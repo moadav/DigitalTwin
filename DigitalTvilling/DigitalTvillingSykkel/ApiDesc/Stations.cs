@@ -4,6 +4,7 @@ using System.Text;
 
 namespace DigitalTvillingSykkel.ApiDesc
 {
+    /// <summary>Class used to dekonstruct the API</summary>
     public class Stations
     {
         public int Station_Id { get; set; }

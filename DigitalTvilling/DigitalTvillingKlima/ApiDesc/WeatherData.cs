@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DigitalTvillingKlima
 {
-   public class WeatherData
+    /// <summary>Class used to dekonstruct the API</summary>
+    public class WeatherData
     {
         public string Updated_at { get; set; }
         public WeatherMeta Meta { get; set; }

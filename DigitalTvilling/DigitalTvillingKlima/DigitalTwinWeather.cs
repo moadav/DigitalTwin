@@ -9,6 +9,9 @@ using Newtonsoft.Json;
 
 namespace DigitalTvillingKlima
 {
+    /// <summary>
+    ///  Class that initializes the API's and creates or updates twins at specific execution times
+    /// </summary>
     public static class DigitalTwinWeather
     { 
         [FunctionName("KlimaData")]

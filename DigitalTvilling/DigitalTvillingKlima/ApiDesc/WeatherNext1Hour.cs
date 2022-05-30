@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace DigitalTvillingKlima
 {
+    /// <summary>Class used to dekonstruct the API</summary>
     public class WeatherNext1Hour
     {
         public WeatherSummary Summary { get; set; }

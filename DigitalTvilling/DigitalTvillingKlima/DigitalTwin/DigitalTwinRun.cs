@@ -11,7 +11,7 @@ using System.Net.Http;
 namespace DigitalTvillingKlima.DigitalTwin
 {
 
-    /// <summary>Class that runs the digital twin logic</summary>
+    /// <summary>Class that runs the digital twin logic for climate</summary>
     public class DigitalTwinRun
     {
 
@@ -19,7 +19,7 @@ namespace DigitalTvillingKlima.DigitalTwin
         private List<Coordinates> Koordinater = new List<Coordinates>();
 
         /// <summary>The DigitalTwinsClient which connects to the Azure Digital Twin plattform</summary>
-        DigitalTwinsClient Client = DigitalTwinsInstansiateClient.DigitalTwinsClient();
+        private readonly DigitalTwinsClient Client = DigitalTwinsInstansiateClient.DigitalTwinsClient();
 
         /// <summary>Gets or sets the weathersymbol.</summary>
         /// <value>The weathersymbol.</value>

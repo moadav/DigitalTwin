@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace DigitalTvillingKlima
 {
+    /// <summary>Class used to dekonstruct the API</summary>
     public class TimeseriesDetails
     {
         public double Air_pressure_at_sea_level;

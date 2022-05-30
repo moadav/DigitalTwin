@@ -4,6 +4,7 @@ using System.Text;
 
 namespace DigitalTvillingSykkel.SykkelTvillingObjekter
 {
+    /// <summary>Class that helps deconstructing the DTDL - model with corresponding values in the DTDL - model</summary>
     public class Station_Information
     {
         public int Station_Id { get; set; }
