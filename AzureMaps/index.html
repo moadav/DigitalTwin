@@ -41,6 +41,8 @@
       
 
       async function getMap() {
+
+        var bikeStations = loadStations();
         await updateStations(bikeStations);
         
 
@@ -75,7 +77,7 @@
         }
 
         // Initialize a map instance.
-        map = new atlas.Map("myMap", map_options) // 'myMap' = id of div to render map
+        map = new atlas.Map("myMap", map_options); // 'myMap' = id of div to render map
 
         // -------------------------------------------------------------------------------------------
         // Testing Route drawing
@@ -93,17 +95,17 @@
           // Add the zoom control to the map.
           map.controls.add(new atlas.control.ZoomControl(), {
             position: "top-right",
-          })
+          });
 
           // Create a reusable popup.
-          popup = new atlas.Popup()
+          popup = new atlas.Popup();
 
           // Initiate DataSource and add to map
           datasource = new atlas.source.DataSource()
-          map.sources.add(datasource)
+          map.sources.add(datasource);
 
           // Add bike stations and boundingbox(?) to the data source.
-          datasource.add(bikeStations)
+          datasource.add(bikeStations);
           //datasource.setShapes(stasjoner);
 
           // Add BoundingBox points to datasource to draw line?
@@ -117,11 +119,11 @@
             //color: "white"
             color: "#4288f7",
             pitchAlignment: "viewport",
-          })
-          map.layers.add(stationsBubbleLayer)
+          });
+          map.layers.add(stationsBubbleLayer);
 
           // Add click event for station popup
-          map.events.add("click", stationsBubbleLayer, featureClicked)
+          map.events.add("click", stationsBubbleLayer, featureClicked);
 
           // -------------------------------------------------------------------------------------------
           // Testing Line Layer

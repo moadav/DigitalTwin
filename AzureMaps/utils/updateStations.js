@@ -16,7 +16,6 @@ function updateBikeStations(bikeStations, data) {
     // bikeStations = stations.js (geojson object)
     // data = data from digital twin (real time data)
 
-    
     // convert data from digital twin to map
     let bikeStationsMap = new Map();
 
@@ -29,13 +28,16 @@ function updateBikeStations(bikeStations, data) {
         let stationId = parseInt(station.properties.station_id);
         let stationDataObject = bikeStationsMap.get(stationId);
 
+        if(stationDataObject === undefined) {
+            return;
+        }
+
         let availableBikes = stationDataObject.Bicycle_Status.Station_Status.Bicycle_Available.Num_Bikes_Available;
         let availableDocks = stationDataObject.Bicycle_Status.Station_Status.Bicycle_Available.Num_Docks_Available;
 
         station.properties.available_bikes = availableBikes;
         station.properties.available_docks = availableDocks;
-    })
-
+    });
 }
 
 

@@ -4,14 +4,16 @@ const { toArray } = require("ix/asynciterable")
 const axios = require("axios").default
 const mlsEndpoint = require("./mlauth.js").mlStudioEndpoint
 
-const express = require("express")
-const cors = require("cors")
-const app = express()
-const PORT = 8080
+const express = require("express");
+
 
 const dt_link = "https://dthiofadt.api.weu.digitaltwins.azure.net"
 const client = new DigitalTwinsClient(dt_link, new DefaultAzureCredential())
 
+const app = express();
+const PORT = 8080;
+
+const cors = require("cors")
 app.use(express.json())
 app.use(cors())
 
@@ -70,7 +72,7 @@ const getWeather = async () => {
 // GET list of all bike stations
 app.get("/bikestations", async (req, res) => {
   let bikeStations = await getDigitalTwin(
-    "SELECT * FROM digitaltwins WHERE IS_OF_MODEL('dtmi:oslo:sykkler:sykkel;1')"
+    "SELECT * FROM digitaltwins WHERE IS_OF_MODEL('dtmi:oslo:sykler:stasjoner;1')"
   )
 
   // let bikeStationsArray = [...bikeStations[0].value, ...bikeStations[1].value, ...bikeStations[2].value]
@@ -90,7 +92,7 @@ app.post("/mlstudio", (req, res) => {
   let stationId = req.body.stationId
   let day = req.body.day
   let time = req.body.time + ":00:00"
-  let temperature = req.body.temperature
+  let temperature = req.body.temperature;
 
   // make sure all fields exist
   if (!stationId || !day || !time || !temperature) {
