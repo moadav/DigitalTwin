@@ -12,44 +12,44 @@ En enkel Digital Tvilling av Oslo Bysykkel og Meteorologisk institutt med visual
     Her ligger Digital Tvilling funksjonalitene laget for å opprette den digitale tvillingen  
     - BysykkelDatafetcher  
        Funksjonaliteter som er laget for å lagre verdier til databasen  
-      -- Migrations  
+      - Migrations  
           Inneholder database migrasjoner  
-      -- utils  
+      - utils  
           Har flere klasser for å lage database modeller  
-      -- FetchDataAndUpdate.cs  
+      - FetchDataAndUpdate.cs  
           Starter funksjonalitet for å hente data fra API-ene og lagrer de i databasen  
-      -- FetcherFunction.cs  
+      - FetcherFunction.cs  
           Starter selve funksjonaliteten for å hente data og lagre dem i databasen  
 
     - DigitalTvillingKlima  
         Funksjonaliteter for å opprette digitale tvillinger basert på Meteorologisk institutt  
-       -- ApiDesc  
+       - ApiDesc  
           Inneholder klasser for å dekonstruere API-et brukt for å hente verdier fra Meteorologisk institutt  
-      -- ApiInfo  
+      - ApiInfo  
           Inneholder en klasse for å initialisere API-et som kommuniserer med Meteorologisk institutt  
-      -- DigitalTwin  
+      - DigitalTwin  
          En klasse som kjører logikken til å instansiere Api-ene, hente verdier fra Meteorologisk institutt api og opprette Meteorologisk institutt tvillinger og sende dem til Azure Digital Twin komponenten  
-      -- Hjelpeklasser  
+      - Hjelpeklasser  
           Inneholder klasser for å instansiere digitale tvilling klienten, sende json-modellene til Azure Digital Twins komponenten, bygge forhold med digitale tvillingene og opprette tvillinger med Meteorologisk institutt modellene  
-      -- DigitalTwinRun  
+      - DigitalTwinRun  
           En klasse som kjører logikken til den digitale tvillingen  
-      -- SykkelTvillingObjekter  
+      - SykkelTvillingObjekter  
           Har flere klasser som etterligner modellene opprettet, som blir brukt for å opprette tvillinger   
-      -- DigitalTwinPublisher  
+      - DigitalTwinPublisher  
           Inneholder alle Azure function klassene   
     - DigitalTvillingSykkel  
        Funksjonaliteter for å opprette digitale tvillinger basert på Oslo Bysykkel  
-      -- ApiDesc  
+      - ApiDesc  
           Inneholder klasser for å dekonstruere API-et brukt for å hente verdier fra Oslo Bysykkel  
-      -- ApiInfo  
+      - ApiInfo  
           Inneholder en klasse for å initialisere API-et som kommuniserer med Oslo Bysykkel  
-      -- DigitalTwin  
+      - DigitalTwin  
           Inneholder en klasse som er bygd opp for å opprette tvillinger med modellene ("Oslo Bysykkel modeller") lagt inn i Azure Digital Twin  
-      -- DigitalTwinRun  
+      - DigitalTwinRun  
           En klasse som kjører logikken til å instansiere Api-ene, hente verdier fra Oslo Bysykkel api og opprette Oslo bysykkel tvilling/er og sende dem til Azure Digital Twin komponenten  
-      -- SykkelTvillingObjekter  
+      - SykkelTvillingObjekter  
           Inneholder klasser som etterligner modellene opprettet, som blir brukt for å opprette tvillinger   
-      -- DigitalTwinPublisher  
+      - DigitalTwinPublisher  
           Inneholder alle Azure function klassene   
     - Modeller/Tvilling_modeller  
         Her ligger modellene som ble brukt for å opprette den digitale tvillingen  
