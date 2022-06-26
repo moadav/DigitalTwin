@@ -11,15 +11,15 @@ En enkel Digital Tvilling av Oslo Bysykkel og Meteorologisk institutt med visual
  - DigitalTvilling   
     Her ligger Digital Tvilling funksjonalitene laget for å opprette den digitale tvillingen  
     - BysykkelDatafetcher  
-       Funksjonaliteter som er laget for å lagre verdier til databasen  
+       Funksjonaliteter som er laget for å lage modeller og lagre verdier til Azure SQL databasen  
       - Migrations  
           Inneholder database migrasjoner  
       - utils  
           Har flere klasser for å lage database modeller  
       - FetchDataAndUpdate.cs  
-          Starter funksjonalitet for å hente data fra API-ene og lagrer de i databasen  
+          Starter funksjonalitet for å hente data fra API-ene og lagrer de i Azure SQL databasen
       - FetcherFunction.cs  
-          Starter selve funksjonaliteten for å hente data og lagre dem i databasen  
+          Starter selve funksjonaliteten for å hente data og lagre dem i Azure SQL databasen 
 
     - DigitalTvillingKlima  
         Funksjonaliteter for å opprette digitale tvillinger basert på Meteorologisk institutt  
@@ -34,7 +34,7 @@ En enkel Digital Tvilling av Oslo Bysykkel og Meteorologisk institutt med visual
       - DigitalTwinRun  
           En klasse som kjører logikken til den digitale tvillingen  
       - SykkelTvillingObjekter  
-          Har flere klasser som etterligner modellene opprettet, som blir brukt for å opprette tvillinger   
+          Har flere klasser som etterligner Meteorologisk institutt modellene opprettet i Azure Digital Twin, som blir brukt for å opprette tvillinger   
       - DigitalTwinPublisher  
           Inneholder alle Azure function klassene   
     - DigitalTvillingSykkel  
