@@ -2,7 +2,7 @@
 Prosjektet mangler tilganger til ulike komponenter i Azure og er derfor ikke kjørbar
 
 # Digital Tvilling
-En enkel Digital Tvilling av Oslo Bysykkel og Meteorologisk institutt med visualisering og simulering.
+En enkel Digital Tvilling med data fra Oslo Bysykkel og Meteorologisk institutt.
 
 
 ## Filstruktur
