@@ -1,6 +1,12 @@
 # Viktig Info
 Prosjektet mangler tilganger til ulike komponenter i Azure og er derfor ikke kjørbar
 
+# Deltagere
+- Jonas Braut
+- Leo Barzinje
+- Trond Kristian Waalen
+- Mohammed Ali Davami
+
 # Digital Tvilling
 En enkel Digital Tvilling med data fra Oslo Bysykkel og Meteorologisk institutt.
 
