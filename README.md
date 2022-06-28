@@ -24,11 +24,11 @@ En enkel Digital Tvilling med data fra Oslo Bysykkel og Meteorologisk institutt.
     - DigitalTvillingKlima  
         Funksjonaliteter for å opprette digitale tvillinger basert på Meteorologisk institutt  
        - ApiDesc  
-          Inneholder klasser for å dekonstruere API-et brukt for å hente verdier fra Meteorologisk institutt  
+          Inneholder klasser for å dekonstruere API-et fra Meteorologisk institutt  
       - ApiInfo  
           Inneholder en klasse for å initialisere API-et som kommuniserer med Meteorologisk institutt  
       - DigitalTwin  
-         En klasse som kjører logikken til å instansiere Api-ene, hente verdier fra Meteorologisk institutt api og opprette Meteorologisk institutt tvillinger og sende dem til Azure Digital Twin komponenten  
+         En klasse som kjører logikken til å instansiere Api-ene, hente verdier fra Meteorologisk institutt api, opprette Meteorologisk institutt tvillinger og sende dem til Azure Digital Twin komponenten  
       - Hjelpeklasser  
           Inneholder klasser for å instansiere digitale tvilling klienten, sende json-modellene til Azure Digital Twins komponenten, bygge forhold med digitale tvillingene og opprette tvillinger med Meteorologisk institutt modellene  
       - DigitalTwinRun  
@@ -40,13 +40,13 @@ En enkel Digital Tvilling med data fra Oslo Bysykkel og Meteorologisk institutt.
     - DigitalTvillingSykkel  
        Funksjonaliteter for å opprette digitale tvillinger basert på Oslo Bysykkel  
       - ApiDesc  
-          Inneholder klasser for å dekonstruere API-et brukt for å hente verdier fra Oslo Bysykkel  
+          Inneholder klasser for å dekonstruere API-et brukt fra Oslo Bysykkel  
       - ApiInfo  
           Inneholder en klasse for å initialisere API-et som kommuniserer med Oslo Bysykkel  
       - DigitalTwin  
           Inneholder en klasse som er bygd opp for å opprette tvillinger med modellene ("Oslo Bysykkel modeller") lagt inn i Azure Digital Twin  
       - DigitalTwinRun  
-          En klasse som kjører logikken til å instansiere Api-ene, hente verdier fra Oslo Bysykkel api og opprette Oslo bysykkel tvilling/er og sende dem til Azure Digital Twin komponenten  
+          En klasse som kjører logikken til å instansiere Api-ene, hente verdier fra Oslo Bysykkel api, opprette Oslo bysykkel tvilling/er og sende dem til Azure Digital Twin komponenten  
       - SykkelTvillingObjekter  
           Inneholder klasser som etterligner modellene opprettet, som blir brukt for å opprette tvillinger   
       - DigitalTwinPublisher  
