@@ -28,7 +28,7 @@ En enkel Digital Tvilling laget med tjenester fra Azure og inneholder data fra O
           Starter selve funksjonaliteten for å hente data og lagre dem i Azure SQL databasen 
 
     - DigitalTvillingKlima  
-        Funksjonaliteter for å opprette digitale tvillinger basert på Meteorologisk institutt  
+        Funksjonaliteter for å opprette digitale tvillinger basert på data fra Meteorologisk institutt  
        - ApiDesc  
           Inneholder klasser for å dekonstruere API-et fra Meteorologisk institutt  
       - ApiInfo  
@@ -44,7 +44,7 @@ En enkel Digital Tvilling laget med tjenester fra Azure og inneholder data fra O
       - DigitalTwinPublisher  
           Inneholder alle Azure function klassene   
     - DigitalTvillingSykkel  
-       Funksjonaliteter for å opprette digitale tvillinger basert på Oslo Bysykkel  
+       Funksjonaliteter for å opprette digitale tvillinger basert på data fra Oslo Bysykkel  
       - ApiDesc  
           Inneholder klasser for å dekonstruere API-et brukt fra Oslo Bysykkel  
       - ApiInfo  
