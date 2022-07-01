@@ -8,7 +8,7 @@ Prosjektet mangler tilganger til ulike komponenter i Azure og er derfor ikke kj√
 - Mohammed Ali Davami
 
 # Digital Tvilling
-En enkel Digital Tvilling laget med Azure med data fra Oslo Bysykkel og Meteorologisk institutt.
+En enkel Digital Tvilling laget med tjenester fra Azure og inneholder data fra Oslo Bysykkel og Meteorologisk institutt.
 
 
 ## Filstruktur
